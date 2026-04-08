@@ -1,0 +1,868 @@
+:root {
+    --ink: #1d2840;
+    --muted: #667287;
+    --surface: rgba(255, 255, 255, 0.9);
+    --surface-strong: rgba(255, 255, 255, 0.96);
+    --surface-soft: #edf4ff;
+    --line: rgba(82, 109, 176, 0.16);
+    --primary: #5d57eb;
+    --primary-strong: #4d89f6;
+    --accent: #e94894;
+    --success: #2fc86f;
+    --warning: #f2a532;
+    --danger: #f0575f;
+    --radius-xl: 34px;
+    --radius-lg: 26px;
+    --radius-md: 18px;
+    --shadow-lg: 0 26px 60px rgba(69, 94, 144, 0.18);
+    --shadow-md: 0 18px 38px rgba(69, 94, 144, 0.14);
+    --transition: 180ms ease;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    min-height: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    margin: 0;
+    font-family: "Inter", sans-serif;
+    color: var(--ink);
+    background:
+        radial-gradient(circle at 10% 10%, rgba(255, 231, 160, 0.28), transparent 18%),
+        radial-gradient(circle at 90% 70%, rgba(255, 192, 218, 0.24), transparent 22%),
+        linear-gradient(180deg, #fdfefe 0%, #eff6ff 100%);
+}
+
+body.modal-open {
+    overflow: hidden;
+}
+
+button,
+a,
+input {
+    font: inherit;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.app-shell {
+    width: min(100%, 1180px);
+    min-height: 100vh;
+    margin: 0 auto;
+    padding: 24px;
+    overflow-x: clip;
+}
+
+.sound-toggle {
+    position: fixed;
+    top: 18px;
+    right: 18px;
+    z-index: 25;
+    box-shadow: 0 12px 28px rgba(78, 108, 173, 0.16);
+}
+
+.screen {
+    min-height: calc(100vh - 48px);
+}
+
+.screen--home,
+.screen--timer,
+.screen--finish {
+    display: grid;
+    gap: 24px;
+}
+
+.top-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    flex-wrap: wrap;
+    position: sticky;
+    top: 16px;
+    z-index: 6;
+}
+
+.top-actions--timer {
+    justify-content: space-between;
+}
+
+.ghost-button,
+.primary-button,
+.control-button,
+.mode-card,
+.text-link-button,
+.icon-button {
+    border: 0;
+    cursor: pointer;
+    transition:
+        transform var(--transition),
+        box-shadow var(--transition),
+        background var(--transition),
+        opacity var(--transition);
+}
+
+.ghost-button,
+.primary-button,
+.control-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 0 18px;
+    border-radius: 18px;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.ghost-button {
+    background: var(--surface-soft);
+    color: var(--ink);
+}
+
+.ghost-button--pill {
+    border-radius: 999px;
+    box-shadow: 0 10px 24px rgba(78, 108, 173, 0.12);
+}
+
+.primary-button {
+    background: linear-gradient(135deg, var(--primary-strong) 0%, var(--primary) 100%);
+    color: #fff;
+    box-shadow: var(--shadow-md);
+}
+
+.primary-button:disabled,
+.control-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+    transform: none !important;
+}
+
+.hero,
+.choice-section,
+.surface-card,
+.finish-card,
+.modal__panel {
+    border-radius: var(--radius-xl);
+    border: 1px solid rgba(255, 255, 255, 0.74);
+    box-shadow: var(--shadow-lg);
+    background: var(--surface);
+    backdrop-filter: blur(14px);
+}
+
+.hero,
+.choice-section,
+.surface-card,
+.finish-card,
+.modal__panel {
+    padding: 28px;
+}
+
+.brand {
+    display: grid;
+    justify-items: center;
+    gap: 18px;
+    text-align: center;
+}
+
+.brand__logo {
+    width: clamp(118px, 15vw, 168px);
+    height: clamp(118px, 15vw, 168px);
+    object-fit: cover;
+    border-radius: 36px;
+    box-shadow: var(--shadow-md);
+}
+
+.brand__copy {
+    display: grid;
+    gap: 10px;
+    max-width: 42rem;
+}
+
+.eyebrow {
+    margin: 0;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #4a73ea;
+}
+
+.brand__copy h1,
+.section-heading h2,
+.setup-card h2,
+.timer-header h2,
+.finish-card h2,
+.modal__header h2 {
+    margin: 0;
+    font-family: "Archivo", sans-serif;
+    overflow-wrap: anywhere;
+}
+
+.brand__copy h1 {
+    font-size: clamp(2.7rem, 5vw, 4.6rem);
+    line-height: 0.98;
+    text-transform: uppercase;
+    background: linear-gradient(90deg, #df8a8a 0%, #4dcdd1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero__text,
+.section-text,
+.mode-card p,
+.timer-status-text,
+.journey-message,
+.finish-card__text,
+.about-copy p,
+.bullet-list li,
+.about-footer {
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+.section-text:empty,
+.preview-panel__hint:empty {
+    display: none;
+}
+
+.section-heading {
+    display: grid;
+    gap: 8px;
+    justify-items: center;
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.section-heading h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+.mode-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.mode-card {
+    display: grid;
+    align-content: start;
+    gap: 16px;
+    min-height: 240px;
+    padding: 24px;
+    border-radius: 30px;
+    color: #fff;
+    text-align: left;
+    box-shadow: var(--shadow-md);
+}
+
+.mode-card--lanche {
+    background: linear-gradient(135deg, #ff9b4f 0%, #ffd462 100%);
+}
+
+.mode-card--casa {
+    background: linear-gradient(135deg, #8d88f9 0%, #e94894 100%);
+}
+
+.mode-card.is-selected {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 24px 42px rgba(69, 94, 144, 0.22);
+    outline: 4px solid rgba(255, 255, 255, 0.44);
+}
+
+.mode-card__emoji {
+    display: inline-grid;
+    place-items: center;
+    width: 72px;
+    height: 72px;
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.18);
+    font-size: 2rem;
+}
+
+.mode-card strong {
+    font-family: "Archivo", sans-serif;
+    font-size: 1.85rem;
+    line-height: 1.08;
+    text-transform: uppercase;
+}
+
+.mode-card p {
+    color: rgba(255, 255, 255, 0.94);
+    text-transform: uppercase;
+}
+
+.setup-card {
+    display: grid;
+    gap: 22px;
+}
+
+.setup-card__header {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: start;
+}
+
+.text-link-button {
+    background: transparent;
+    color: var(--primary);
+    font-weight: 700;
+}
+
+.input-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.time-field {
+    display: grid;
+    gap: 10px;
+}
+
+.time-field span,
+.mini-label {
+    font-size: 0.86rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #5b6e90;
+}
+
+.time-field input {
+    width: 100%;
+    min-height: 76px;
+    padding: 0 18px;
+    border-radius: 20px;
+    border: 1px solid var(--line);
+    background: var(--surface-soft);
+    color: var(--ink);
+    font-family: "Archivo", sans-serif;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 700;
+    text-align: center;
+    outline: none;
+}
+
+.time-field input:focus {
+    border-color: rgba(77, 137, 246, 0.56);
+    box-shadow: 0 0 0 4px rgba(77, 137, 246, 0.12);
+}
+
+.preview-panel {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: center;
+    padding: 20px;
+    border-radius: 22px;
+    background: linear-gradient(135deg, rgba(77, 137, 246, 0.12) 0%, rgba(233, 72, 148, 0.08) 100%);
+}
+
+.preview-panel__time {
+    display: grid;
+    gap: 6px;
+}
+
+.preview-panel__time strong {
+    font-family: "Archivo", sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1;
+}
+
+.preview-panel__hint {
+    max-width: 24rem;
+    text-align: right;
+}
+
+.hero__text,
+.section-text,
+.preview-panel__hint,
+.timer-status-text,
+.finish-card__text,
+.about-footer {
+    text-transform: uppercase;
+}
+
+.timer-header {
+    display: grid;
+    gap: 10px;
+    justify-items: center;
+    text-align: center;
+}
+
+.timer-header h2 {
+    font-size: clamp(2.4rem, 4vw, 4rem);
+    text-transform: uppercase;
+}
+
+.journey-card {
+    display: grid;
+    gap: 24px;
+}
+
+.journey-card.is-lanche {
+    background:
+        linear-gradient(180deg, rgba(255, 246, 207, 0.94), rgba(255, 255, 255, 0.96)),
+        var(--surface);
+}
+
+.journey-card.is-casa {
+    background:
+        linear-gradient(180deg, rgba(239, 241, 255, 0.94), rgba(255, 255, 255, 0.96)),
+        var(--surface);
+}
+
+.journey-card__top,
+.journey-card__bottom,
+.time-split {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: center;
+}
+
+.countdown-value {
+    display: block;
+    margin-top: 8px;
+    font-family: "Archivo", sans-serif;
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    line-height: 0.92;
+}
+
+.progress-badge,
+.time-split__card {
+    padding: 16px 18px;
+    border-radius: 18px;
+    background: var(--surface-soft);
+    border: 1px solid var(--line);
+    text-align: center;
+}
+
+.progress-badge strong,
+.time-split__card strong {
+    display: block;
+    margin-top: 6px;
+    font-family: "Archivo", sans-serif;
+    font-size: 1.55rem;
+}
+
+.journey-scene {
+    overflow: hidden;
+    padding: 10px 8px 0;
+}
+
+.journey-track {
+    position: relative;
+    min-height: 270px;
+    padding: 20px 12px 28px;
+}
+
+.journey-path {
+    position: absolute;
+    left: 46px;
+    right: 170px;
+    top: 148px;
+    height: 12px;
+    border-radius: 999px;
+    background: rgba(181, 194, 218, 0.44);
+}
+
+.journey-path--progress {
+    width: 0;
+    right: auto;
+    background: linear-gradient(90deg, #5d57eb 0%, #4d89f6 100%);
+    box-shadow: 0 0 16px rgba(77, 137, 246, 0.26);
+    transition: width 360ms ease;
+}
+
+.journey-milestones {
+    position: absolute;
+    left: 46px;
+    right: 170px;
+    top: 126px;
+    display: grid;
+    gap: 0;
+}
+
+.journey-milestones span {
+    justify-self: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 999px;
+    background: rgba(240, 109, 109, 0.22);
+    border: 3px solid rgba(255, 255, 255, 0.9);
+    box-shadow: 0 6px 12px rgba(82, 109, 176, 0.12);
+    transition: transform var(--transition), background var(--transition), box-shadow var(--transition);
+}
+
+.journey-milestones span.is-active {
+    background: var(--milestone-color, #f0575f);
+    transform: scale(1.18);
+    box-shadow: 0 10px 18px color-mix(in srgb, var(--milestone-color, #f0575f) 36%, transparent);
+}
+
+.student-marker {
+    position: absolute;
+    top: 58px;
+    left: 22px;
+    width: 120px;
+    height: 120px;
+    transition: left 600ms ease, transform 240ms ease;
+}
+
+.student-marker img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 14px 20px rgba(70, 95, 145, 0.22));
+    animation: float-soft 2.1s ease-in-out infinite;
+}
+
+.destination-marker {
+    position: absolute;
+    right: 0;
+    top: 12px;
+    width: 180px;
+    display: grid;
+    justify-items: center;
+    gap: 12px;
+}
+
+.destination-marker img {
+    width: 100%;
+    max-width: 164px;
+    height: 164px;
+    object-fit: contain;
+    filter: drop-shadow(0 18px 22px rgba(70, 95, 145, 0.2));
+    animation: pulse-soft 2.6s ease-in-out infinite;
+}
+
+.destination-marker span {
+    text-align: center;
+    font-weight: 700;
+    color: #50607a;
+}
+
+.journey-message {
+    font-size: 1.04rem;
+    font-weight: 600;
+}
+
+.time-split {
+    gap: 12px;
+}
+
+.time-split__card {
+    flex: 1;
+}
+
+.controls {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.control-button {
+    min-width: 160px;
+    color: #fff;
+    box-shadow: var(--shadow-md);
+}
+
+.control-button--pause {
+    background: linear-gradient(135deg, #f4b53f 0%, #f0822a 100%);
+}
+
+.control-button--resume {
+    background: linear-gradient(135deg, #2fc86f 0%, #24a95a 100%);
+}
+
+.control-button--reset {
+    background: linear-gradient(135deg, #7a8598 0%, #5f6878 100%);
+}
+
+.control-button--back {
+    background: linear-gradient(135deg, #8d88f9 0%, #5d57eb 100%);
+}
+
+.finish-card {
+    display: grid;
+    gap: 18px;
+    justify-items: center;
+    text-align: center;
+    padding-block: 42px;
+}
+
+.finish-card__emoji {
+    font-size: clamp(4rem, 10vw, 7rem);
+}
+
+.finish-card__visuals {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 22px;
+    padding: 18px 30px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, rgba(255, 244, 191, 0.58), rgba(222, 239, 255, 0.64));
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.7), 0 18px 38px rgba(69, 94, 144, 0.12);
+}
+
+.finish-card__visuals img {
+    width: clamp(150px, 22vw, 220px);
+    height: clamp(150px, 22vw, 220px);
+    object-fit: contain;
+    filter: drop-shadow(0 20px 28px rgba(70, 95, 145, 0.22));
+    animation: pulse-soft 2.6s ease-in-out infinite;
+}
+
+.finish-card h2 {
+    text-transform: uppercase;
+}
+
+.finish-card__badge {
+    padding: 10px 16px;
+    border-radius: 999px;
+    background: rgba(77, 137, 246, 0.12);
+    color: #4d89f6;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.finish-card__actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    z-index: 30;
+}
+
+.modal__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(17, 33, 61, 0.28);
+    backdrop-filter: blur(4px);
+}
+
+.modal__panel {
+    position: relative;
+    width: min(100% - 28px, 760px);
+    margin: 7vh auto 0;
+    background: var(--surface-strong);
+}
+
+.modal__header {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: start;
+}
+
+.modal__content {
+    display: grid;
+    gap: 14px;
+    margin-top: 18px;
+}
+
+.icon-button {
+    width: 42px;
+    height: 42px;
+    border-radius: 999px;
+    background: var(--surface-soft);
+    color: var(--ink);
+    font-size: 1.6rem;
+}
+
+.about-copy {
+    display: grid;
+    gap: 12px;
+}
+
+.bullet-list {
+    margin: 0;
+    padding-left: 18px;
+    display: grid;
+    gap: 8px;
+}
+
+.about-footer {
+    font-weight: 700;
+}
+
+@keyframes float-soft {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-6px);
+    }
+}
+
+@keyframes pulse-soft {
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.04);
+    }
+}
+
+@media (hover: hover) {
+    .ghost-button:hover,
+    .primary-button:hover,
+    .control-button:hover,
+    .mode-card:hover,
+    .text-link-button:hover,
+    .icon-button:hover {
+        transform: translateY(-2px);
+    }
+}
+
+@media (max-width: 980px) {
+    .mode-grid,
+    .input-grid,
+    .journey-card__top,
+    .journey-card__bottom,
+    .time-split {
+        grid-template-columns: 1fr;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .journey-track {
+        min-height: 340px;
+        padding-bottom: 10px;
+    }
+
+    .journey-path,
+    .journey-milestones {
+        left: 30px;
+        right: 30px;
+    }
+
+    .destination-marker {
+        position: relative;
+        right: auto;
+        top: auto;
+        margin: 30px auto 0;
+    }
+
+    .student-marker {
+        top: 46px;
+    }
+}
+
+@media (max-width: 680px) {
+    .app-shell {
+        padding: 14px;
+    }
+
+    .sound-toggle {
+        top: 12px;
+        right: 12px;
+        min-height: 44px;
+        padding-inline: 14px;
+        font-size: 0.94rem;
+    }
+
+    .screen {
+        min-height: calc(100vh - 28px);
+    }
+
+    .hero,
+    .choice-section,
+    .surface-card,
+    .finish-card,
+    .modal__panel {
+        padding: 22px;
+        border-radius: 28px;
+    }
+
+    .brand__copy {
+        max-width: 20rem;
+        margin: 0 auto;
+    }
+
+    .brand__copy h1 {
+        font-size: 2.2rem;
+        line-height: 1.04;
+    }
+
+    .mode-grid,
+    .input-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .mode-card {
+        min-height: 0;
+    }
+
+    .time-field input {
+        min-height: 68px;
+        font-size: 2.2rem;
+    }
+
+    .countdown-value {
+        font-size: 2.7rem;
+    }
+
+    .journey-track {
+        min-height: 300px;
+    }
+
+    .destination-marker,
+    .destination-marker img {
+        width: 130px;
+        max-width: 130px;
+        height: 130px;
+    }
+
+    .student-marker {
+        width: 92px;
+        height: 92px;
+    }
+
+    .journey-path,
+    .journey-milestones {
+        left: 20px;
+        right: 20px;
+    }
+
+    .controls {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .control-button {
+        min-width: 0;
+    }
+
+    .finish-card__actions {
+        display: grid;
+        width: 100%;
+    }
+}

@@ -1,0 +1,14 @@
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Editors
+.vscode/
+.idea/
+
+# Temporary files
+*.tmp
+*.log
+
+# Python local server cache
+__pycache__/

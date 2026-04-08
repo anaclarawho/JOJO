@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#b8d2ff">
+    <title>JOJO | Fluência Leitora - Palavras</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <div class="app-shell">
+        <div id="homeScreen" class="screen screen--home">
+            <div class="home-top-actions">
+                <a class="ghost-button ghost-button--pill" href="../../">Voltar à JOJO</a>
+                <button id="openInfoBtn" class="ghost-button ghost-button--pill" type="button">Como funciona</button>
+                <button id="toggleSoundBtn" class="ghost-button ghost-button--pill" type="button" aria-pressed="true">Som ligado</button>
+            </div>
+
+            <div class="home-decor" aria-hidden="true">
+                <span class="home-decor__emoji home-decor__emoji--left">⭐</span>
+                <span class="home-decor__emoji home-decor__emoji--right">✨</span>
+                <span class="home-decor__emoji home-decor__emoji--bottom">📚</span>
+                <span class="home-decor__dot home-decor__dot--yellow"></span>
+                <span class="home-decor__dot home-decor__dot--pink"></span>
+                <span class="home-decor__dot home-decor__dot--blue"></span>
+            </div>
+
+            <header class="hero">
+                <div class="brand">
+                    <img src="./assets/jojo-eyes-logo.png" alt="Logo JOJO" class="brand__logo">
+                    <div class="brand__copy">
+                        <p class="eyebrow">JOJO</p>
+                        <h1>Teste de Fluência Leitora</h1>
+                        <p class="hero__text">Escolha um modo e um tipo de letra para começar a leitura.</p>
+                    </div>
+                </div>
+            </header>
+
+            <section class="mode-section">
+                <div class="section-heading section-heading--stack">
+                    <p class="eyebrow">Modo 1</p>
+                    <h2>Teste cronometrado</h2>
+                    <p class="section-text">Leitura com cronômetro de 1 minuto.</p>
+                </div>
+
+                <div class="selection-grid">
+                    <button class="mode-card mode-card--timed-lower" type="button" data-start-mode="timed" data-letter="lowercase">
+                        <span class="mode-card__icon">abc</span>
+                        <strong>LETRA IMPRESSA</strong>
+                        <span class="mode-card__subtitle">minúscula</span>
+                        <div class="mode-card__preview">
+                            <p>casa • bola • pato</p>
+                            <p>gato • mala • coco</p>
+                        </div>
+                    </button>
+                    <button class="mode-card mode-card--timed-upper" type="button" data-start-mode="timed" data-letter="uppercase">
+                        <span class="mode-card__icon">AB<br>CD</span>
+                        <strong>LETRA IMPRESSA</strong>
+                        <span class="mode-card__subtitle">MAIÚSCULA</span>
+                        <div class="mode-card__preview">
+                            <p>CASA • BOLA • PATO</p>
+                            <p>GATO • MALA • COCO</p>
+                        </div>
+                    </button>
+                    <button class="mode-card mode-card--timed-cursive" type="button" data-start-mode="timed" data-letter="cursive">
+                        <span class="mode-card__icon mode-card__icon--cursive">Aa</span>
+                        <strong>LETRA CURSIVA</strong>
+                        <span class="mode-card__subtitle">manuscrita</span>
+                        <div class="mode-card__preview mode-card__preview--cursive">
+                            <p>casa • bola • pato</p>
+                            <p>gato • mala • coco</p>
+                        </div>
+                    </button>
+                </div>
+            </section>
+
+            <section class="mode-section">
+                <div class="section-heading section-heading--stack">
+                    <p class="eyebrow">Modo 2</p>
+                    <h2>Leitura livre</h2>
+                    <p class="section-text">Treino no seu ritmo, sem pressão do tempo.</p>
+                </div>
+
+                <div class="selection-grid">
+                    <button class="mode-card mode-card--free-lower" type="button" data-start-mode="free" data-letter="lowercase">
+                        <span class="mode-card__icon">abc</span>
+                        <strong>LETRA IMPRESSA</strong>
+                        <span class="mode-card__subtitle">minúscula</span>
+                        <div class="mode-card__preview">
+                            <p>casa • bola • pato</p>
+                            <p>gato • mala • coco</p>
+                        </div>
+                    </button>
+                    <button class="mode-card mode-card--free-upper" type="button" data-start-mode="free" data-letter="uppercase">
+                        <span class="mode-card__icon">AB<br>CD</span>
+                        <strong>LETRA IMPRESSA</strong>
+                        <span class="mode-card__subtitle">MAIÚSCULA</span>
+                        <div class="mode-card__preview">
+                            <p>CASA • BOLA • PATO</p>
+                            <p>GATO • MALA • COCO</p>
+                        </div>
+                    </button>
+                    <button class="mode-card mode-card--free-cursive" type="button" data-start-mode="free" data-letter="cursive">
+                        <span class="mode-card__icon mode-card__icon--cursive">Aa</span>
+                        <strong>LETRA CURSIVA</strong>
+                        <span class="mode-card__subtitle">manuscrita</span>
+                        <div class="mode-card__preview mode-card__preview--cursive">
+                            <p>casa • bola • pato</p>
+                            <p>gato • mala • coco</p>
+                        </div>
+                    </button>
+                </div>
+            </section>
+        </div>
+
+        <div id="sessionScreen" class="screen screen--session hidden" data-mode="timed">
+            <header class="session-header">
+                <button id="backHomeBtn" class="icon-button icon-button--light" type="button" aria-label="Voltar ao início">←</button>
+
+                <div class="session-center">
+                    <p id="sessionModeLabel" class="session-pill">Teste cronometrado</p>
+                    <div id="timerValue" class="session-timer">01:00</div>
+                    <p id="timerCaption" class="session-caption">Tempo restante</p>
+                    <p id="sessionLetterLabel" class="session-letter-label">Letra impressa minúscula</p>
+                </div>
+
+                <div class="session-side">
+                    <button id="sessionSoundBtn" class="ghost-button ghost-button--small ghost-button--light" type="button" aria-pressed="true">Som ligado</button>
+                    <div class="session-scoreboard">
+                        <div id="shownValue" class="session-scoreboard__value">0/100</div>
+                        <div class="session-scoreboard__label">Palavras</div>
+                        <div id="readValue" class="session-scoreboard__line">0 lidas</div>
+                        <div id="paceValue" class="session-scoreboard__line session-scoreboard__line--success">0 PPM</div>
+                        <span id="skippedValue" class="sr-only">0</span>
+                    </div>
+                </div>
+            </header>
+
+            <section class="word-stage">
+                <div id="wordDisplay" class="word-display">Clique em próxima para começar</div>
+                <p id="helperText" class="helper-text">Espaço avança • X marca dificuldade • Enter encerra</p>
+            </section>
+
+            <div class="session-actions">
+                <button id="finishBtn" class="floating-button floating-button--finish" type="button">Encerrar</button>
+
+                <div class="session-actions__right">
+                    <button id="skipBtn" class="floating-button floating-button--skip" type="button" aria-label="Não conseguiu ler">✕</button>
+                    <button id="nextBtn" class="floating-button floating-button--next" type="button">
+                        <span class="floating-button__icon">▶</span>
+                        <span>Próxima</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="resultScreen" class="screen screen--result hidden">
+            <div class="result-card">
+                <p class="eyebrow">Resumo</p>
+                <h2 id="resultTitle">Sessão concluída</h2>
+                <div class="result-score">
+                    <strong id="resultScore">0</strong>
+                    <span id="resultScoreLabel">palavras lidas</span>
+                </div>
+                <p id="resultPace" class="result-pace">0 PPM</p>
+                <p id="resultSummary" class="result-summary"></p>
+
+                <div id="resultSkippedBox" class="result-skipped hidden">
+                    <span class="eyebrow">Palavras com dificuldade</span>
+                    <p id="resultSkippedWords"></p>
+                </div>
+
+                <div class="result-actions">
+                    <button id="retryBtn" class="primary-button" type="button">Tentar novamente</button>
+                    <button id="resultHomeBtn" class="ghost-button" type="button">Voltar ao início</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="infoModal" class="modal hidden" aria-hidden="true">
+            <div class="modal__backdrop"></div>
+            <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="infoTitle">
+                <div class="modal__header">
+                    <div>
+                        <p class="eyebrow">Informações</p>
+                        <h2 id="infoTitle">Sobre o jogo</h2>
+                    </div>
+                    <button id="closeInfoBtn" class="icon-button" type="button" aria-label="Fechar">×</button>
+                </div>
+
+                <div class="modal__content">
+                    <p>Este jogo foi pensado para treinar leitura de palavras de forma simples, clara e rápida.</p>
+                    <ul class="bullet-list">
+                        <li>O modo cronometrado calcula palavras por minuto.</li>
+                        <li>O modo livre ajuda no treino sem pressão.</li>
+                        <li>É possível ativar ou desligar os sons do jogo.</li>
+                    </ul>
+                    <div>
+                        <p class="modal__subtitle">Média esperada de referência</p>
+                        <div id="benchmarkGrid" class="benchmark-grid"></div>
+                    </div>
+                    <p>Na próxima etapa, podemos separar também por série, nível e tema, sem mudar a base do jogo.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./data.js"></script>
+    <script src="./app.js"></script>
+</body>
+</html>

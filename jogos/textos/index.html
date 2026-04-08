@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#b8d2ff">
+    <title>JOJO | Fluência Leitora - Textos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <div class="app-shell">
+        <div id="homeScreen" class="screen screen--home">
+            <div class="home-top-actions">
+                <a class="ghost-button ghost-button--pill" href="../../">Voltar à JOJO</a>
+                <button id="openInfoBtn" class="ghost-button ghost-button--pill" type="button">Como funciona</button>
+                <button id="toggleSoundBtn" class="ghost-button ghost-button--pill" type="button" aria-pressed="true">Som ligado</button>
+            </div>
+
+            <div class="home-decor" aria-hidden="true">
+                <span class="home-decor__emoji home-decor__emoji--left">📚</span>
+                <span class="home-decor__emoji home-decor__emoji--right">✨</span>
+                <span class="home-decor__emoji home-decor__emoji--bottom">🏆</span>
+                <span class="home-decor__dot home-decor__dot--yellow"></span>
+                <span class="home-decor__dot home-decor__dot--pink"></span>
+                <span class="home-decor__dot home-decor__dot--blue"></span>
+            </div>
+
+            <header class="hero">
+                <div class="brand">
+                    <img src="./assets/jojo-eyes-logo.png" alt="Logo JOJO" class="brand__logo">
+                    <div class="brand__copy">
+                        <p class="eyebrow">JOJO | Língua Portuguesa</p>
+                        <h1>Simulado de Fluência Leitora</h1>
+                        <p class="hero__text">Escolha o ano escolar e monte sua sessão com texto, palavras e pseudopalavras.</p>
+                    </div>
+                </div>
+            </header>
+
+            <section class="mode-section">
+                <div class="section-heading section-heading--stack">
+                    <p class="eyebrow">Começo</p>
+                    <h2>Escolha o ano escolar</h2>
+                    <p class="section-text">Cada ano traz testes com leitura, compreensão e progressão de dificuldade.</p>
+                </div>
+
+                <div class="year-grid">
+                    <button class="year-card year-card--one" type="button" data-year="1">
+                        <span class="year-card__icon">🌱</span>
+                        <strong>1º Ano</strong>
+                        <span>Textos curtos e início da fluência.</span>
+                    </button>
+                    <button class="year-card year-card--two" type="button" data-year="2">
+                        <span class="year-card__icon">🌿</span>
+                        <strong>2º Ano</strong>
+                        <span>Mais ritmo, precisão e compreensão.</span>
+                    </button>
+                    <button class="year-card year-card--three" type="button" data-year="3">
+                        <span class="year-card__icon">🌳</span>
+                        <strong>3º Ano</strong>
+                        <span>Séries A e B para percursos diferentes.</span>
+                    </button>
+                    <button class="year-card year-card--four" type="button" data-year="4">
+                        <span class="year-card__icon">🌟</span>
+                        <strong>4º e 5º Ano</strong>
+                        <span>Mais volume, automação e desafio.</span>
+                    </button>
+                </div>
+            </section>
+
+            <div class="credits-strip">
+                <img src="./assets/jojo-eyes-logo.png" alt="JOJO">
+                <p>Idealizado por Ana Clara Silva de Lima</p>
+            </div>
+        </div>
+
+        <div id="selectionScreen" class="screen screen--selection hidden">
+            <div class="home-top-actions">
+                <button id="selectionBackBtn" class="ghost-button ghost-button--pill" type="button">Voltar</button>
+                <button id="selectionInfoBtn" class="ghost-button ghost-button--pill" type="button">Como funciona</button>
+                <button id="selectionSoundBtn" class="ghost-button ghost-button--pill" type="button" aria-pressed="true">Som ligado</button>
+            </div>
+
+            <section class="surface-card selection-panel">
+                <p id="selectionEyebrow" class="eyebrow"></p>
+                <h2 id="selectionTitle"></h2>
+                <p id="selectionSubtitle" class="section-text"></p>
+                <div id="selectionGrid" class="selection-card-grid"></div>
+            </section>
+        </div>
+
+        <div id="sessionScreen" class="screen screen--session hidden">
+            <header class="session-header">
+                <button id="sessionHomeBtn" class="icon-button icon-button--light" type="button" aria-label="Voltar ao início">←</button>
+
+                <div class="session-center">
+                    <p id="sessionEyebrow" class="session-pill"></p>
+                    <div id="sessionHeading" class="session-heading"></div>
+                    <p id="sessionCode" class="session-caption"></p>
+                </div>
+
+                <button id="sessionSoundBtn" class="ghost-button ghost-button--small ghost-button--light" type="button" aria-pressed="true">Som ligado</button>
+            </header>
+
+            <section class="surface-card session-summary">
+                <div class="session-toolbar">
+                    <div>
+                        <p id="sessionStepHint" class="eyebrow"></p>
+                        <h2>Acompanhe tempo e erros</h2>
+                    </div>
+                    <button id="backToSelectionBtn" class="text-link-button" type="button">Voltar aos testes</button>
+                </div>
+
+                <div id="stepNavigation" class="step-nav"></div>
+
+                <div class="stats-row">
+                    <article class="stat-card">
+                        <strong id="timer">00:00</strong>
+                        <span>Tempo</span>
+                        <small id="timeLimitLabel"></small>
+                    </article>
+                    <article class="stat-card stat-card--danger">
+                        <strong id="errorCount">0</strong>
+                        <span>Erros</span>
+                        <small id="maxErrorsLabel"></small>
+                    </article>
+                </div>
+            </section>
+
+            <section id="textStep" class="surface-card step-panel">
+                <h3 class="step-title">📖 Leitura do Texto</h3>
+
+                <div class="text-stage">
+                    <h4 id="textTitle"></h4>
+                    <div id="readingText" class="reading-text"></div>
+                </div>
+
+                <div class="content-grid">
+                    <article class="info-box">
+                        <h4>📋 Critérios de avaliação</h4>
+                        <div class="criteria-list">
+                            <p><strong>Prosódia:</strong> Ritmo e entonação adequados.</p>
+                            <p><strong>Precisão:</strong> <span id="criteriaMaxErrors"></span></p>
+                            <p><strong>Tempo:</strong> <span id="criteriaMaxTime"></span></p>
+                        </div>
+                    </article>
+
+                    <article class="info-box info-box--questions">
+                        <h4>❓ Perguntas de compreensão</h4>
+                        <div id="questions" class="question-list"></div>
+                        <button id="checkAnswersBtn" class="primary-button question-check-button" type="button">Verificar respostas</button>
+                        <div id="results" class="results-box hidden"></div>
+                    </article>
+                </div>
+            </section>
+
+            <section id="wordsStep" class="surface-card step-panel hidden">
+                <h3 class="step-title">📝 Leitura de Palavras</h3>
+                <p class="step-text">Treine o reconhecimento rápido das palavras antes de seguir para a próxima etapa.</p>
+
+                <div id="wordsGrid" class="chip-grid"></div>
+
+                <div id="autoWordsInterface" class="auto-panel hidden">
+                    <div class="auto-panel__top">
+                        <div class="auto-progress">
+                            <span>Palavra</span>
+                            <strong><span id="wordCounter">0</span> de <span id="totalWords">0</span></strong>
+                        </div>
+                        <div class="auto-panel__actions">
+                            <button id="startAutoWords" class="primary-button" type="button">Iniciar palavras</button>
+                            <button id="markNotRead" class="secondary-button" type="button" disabled>Não leu</button>
+                        </div>
+                    </div>
+
+                    <div id="autoWordsGrid" class="chip-grid chip-grid--auto"></div>
+
+                    <div class="warning-box">
+                        <h4>Palavras não lidas</h4>
+                        <p><strong id="notReadCount">0</strong> marcadas</p>
+                        <div id="notReadList" class="warning-box__list">Nenhuma palavra marcada.</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="pseudoStep" class="surface-card step-panel hidden">
+                <h3 class="step-title">🔤 Leitura de Pseudopalavras</h3>
+                <p class="step-text">Palavras inventadas que seguem as regras do português e ajudam a avaliar a decodificação.</p>
+
+                <div id="pseudoGrid" class="chip-grid chip-grid--pseudo"></div>
+
+                <div id="autoPseudoInterface" class="auto-panel hidden">
+                    <div class="auto-panel__top">
+                        <div class="auto-progress">
+                            <span>Pseudopalavra</span>
+                            <strong><span id="pseudoCounter">0</span> de <span id="totalPseudos">0</span></strong>
+                        </div>
+                        <div class="auto-panel__actions">
+                            <button id="startAutoPseudos" class="primary-button" type="button">Iniciar pseudopalavras</button>
+                            <button id="markPseudoNotRead" class="secondary-button" type="button" disabled>Não leu</button>
+                        </div>
+                    </div>
+
+                    <div id="autoPseudoGrid" class="chip-grid chip-grid--auto chip-grid--pseudo"></div>
+
+                    <div class="warning-box">
+                        <h4>Pseudopalavras não lidas</h4>
+                        <p><strong id="pseudoNotReadCount">0</strong> marcadas</p>
+                        <div id="pseudoNotReadList" class="warning-box__list">Nenhuma pseudopalavra marcada.</div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="control-dock">
+                <button id="startBtn" class="control-button control-button--start" type="button">Iniciar</button>
+                <button id="stopBtn" class="control-button control-button--stop" type="button" disabled>Parar</button>
+                <button id="errorBtn" class="control-button control-button--warn" type="button">+1 Erro</button>
+                <button id="resetBtn" class="control-button control-button--reset" type="button">Reset</button>
+            </div>
+        </div>
+
+        <div id="infoModal" class="modal hidden" aria-hidden="true">
+            <div class="modal__backdrop"></div>
+            <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="infoTitle">
+                <div class="modal__header">
+                    <div>
+                        <p class="eyebrow">Informações</p>
+                        <h2 id="infoTitle">Como funciona o simulado</h2>
+                    </div>
+                    <button id="closeInfoBtn" class="icon-button" type="button" aria-label="Fechar">×</button>
+                </div>
+
+                <div class="modal__content">
+                    <p>Este jogo foi pensado para treinar fluência leitora com a mesma lógica de um simulado: texto, compreensão, palavras e pseudopalavras.</p>
+                    <ul class="bullet-list">
+                        <li>Escolha o ano escolar e depois o teste desejado.</li>
+                        <li>Use o cronômetro para acompanhar o tempo da leitura.</li>
+                        <li>Marque erros durante a aplicação sem perder o foco no texto.</li>
+                        <li>No 4º e 5º ano, as listas podem ser exibidas automaticamente em sequência.</li>
+                        <li>Os sons ajudam a sinalizar começo, erros, conferência e avisos.</li>
+                    </ul>
+                    <p>O conteúdo dos testes foi mantido como na versão original; aqui nós melhoramos a experiência visual, a navegação e a organização do código.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./data.js"></script>
+    <script src="./app.js"></script>
+</body>
+</html>
