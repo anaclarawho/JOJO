@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#dbe8ff">
+    <title>JOJO | Cabo de Guerra Matematico</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <div id="app" class="math-tug-app is-setup-open">
+        <header class="topbar">
+            <a class="top-pill top-pill--home" href="../../">
+                <span class="top-pill__icon">⌂</span>
+                <span>HOME</span>
+            </a>
+
+            <div class="brand-block">
+                <p class="brand-block__eyebrow">JOJO | JOGO MATEMATICO INTERATIVO</p>
+                <h1>CABO DE GUERRA MATEMATICO</h1>
+            </div>
+
+            <button id="changeTeamsBtn" class="top-pill top-pill--ghost" type="button">
+                <span class="top-pill__icon">↺</span>
+                <span>TROCAR EQUIPES</span>
+            </button>
+        </header>
+
+        <main class="game-layout">
+            <section class="team-panel team-panel--blue" data-team-side="left">
+                <header class="team-panel__header">
+                    <strong id="leftPanelName">EQUIPE AZUL</strong>
+                    <span id="leftScoreBadge" class="score-badge">0</span>
+                </header>
+
+                <div class="problem-board">
+                    <div id="leftProblem" class="problem-expression">? + ? = ?</div>
+                    <div id="leftAnswerDisplay" class="answer-display">—</div>
+                </div>
+
+                <div class="keypad" data-keypad="left">
+                    <button type="button" data-key="1">1</button>
+                    <button type="button" data-key="2">2</button>
+                    <button type="button" data-key="3">3</button>
+                    <button type="button" data-key="4">4</button>
+                    <button type="button" data-key="5">5</button>
+                    <button type="button" data-key="6">6</button>
+                    <button type="button" data-key="7">7</button>
+                    <button type="button" data-key="8">8</button>
+                    <button type="button" data-key="9">9</button>
+                    <button type="button" class="keypad__danger" data-key="clear">×</button>
+                    <button type="button" data-key="0">0</button>
+                    <button type="button" class="keypad__success" data-key="submit">✓</button>
+                </div>
+
+                <p id="leftStatus" class="team-status">AGUARDANDO O INICIO DA PARTIDA</p>
+            </section>
+
+            <section class="arena-panel">
+                <div class="arena-panel__top">
+                    <div class="arena-score">
+                        <span id="leftArenaName">EQUIPE AZUL</span>
+                        <strong id="leftArenaScore">0</strong>
+                    </div>
+
+                    <div class="match-timer">
+                        <span class="match-timer__icon">◷</span>
+                        <strong id="matchTimer">00:00</strong>
+                    </div>
+
+                    <div class="arena-score arena-score--right">
+                        <span id="rightArenaName">EQUIPE VERMELHA</span>
+                        <strong id="rightArenaScore">0</strong>
+                    </div>
+                </div>
+
+                <div class="arena-stage">
+                    <div class="arena-stage__line"></div>
+                    <div id="ropeWrapper" class="rope-wrapper">
+                        <iframe
+                            class="rope-wrapper__frame"
+                            src="./gif-frame.html"
+                            title="Cabo de guerra animado"
+                            tabindex="-1"
+                            loading="eager"
+                        ></iframe>
+                    </div>
+
+                    <div id="roundFeedback" class="round-feedback hidden"></div>
+
+                    <div id="countdownOverlay" class="countdown-overlay hidden" aria-live="assertive">
+                        <div id="countdownValue" class="countdown-overlay__value">3</div>
+                    </div>
+
+                    <div id="resultOverlay" class="result-overlay hidden">
+                        <div class="result-card">
+                            <p class="result-card__eyebrow">PARTIDA ENCERRADA</p>
+                            <img id="resultBadge" class="result-card__badge hidden" src="./assets/ganhou-azul.gif" alt="Equipe vencedora">
+                            <h2 id="resultTitle">EQUIPE AZUL VENCEU</h2>
+                            <p id="resultText">FOI UMA DISPUTA INCRIVEL.</p>
+                            <div class="result-card__actions">
+                                <button id="playAgainBtn" class="primary-action" type="button">JOGAR DE NOVO</button>
+                                <button id="openSetupBtn" class="secondary-action" type="button">AJUSTAR PARTIDA</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="arena-panel__bottom">
+                    <div class="round-chip">
+                        <span>RODADA</span>
+                        <strong id="roundCounter">0 / 10</strong>
+                    </div>
+
+                    <div class="round-chip round-chip--accent">
+                        <span>OPERACOES</span>
+                        <strong id="operationsLabel">ADICAO</strong>
+                    </div>
+                </div>
+            </section>
+
+            <section class="team-panel team-panel--red" data-team-side="right">
+                <header class="team-panel__header">
+                    <strong id="rightPanelName">EQUIPE VERMELHA</strong>
+                    <span id="rightScoreBadge" class="score-badge">0</span>
+                </header>
+
+                <div class="problem-board problem-board--red">
+                    <div id="rightProblem" class="problem-expression">? + ? = ?</div>
+                    <div id="rightAnswerDisplay" class="answer-display">—</div>
+                </div>
+
+                <div class="keypad keypad--red" data-keypad="right">
+                    <button type="button" data-key="1">1</button>
+                    <button type="button" data-key="2">2</button>
+                    <button type="button" data-key="3">3</button>
+                    <button type="button" data-key="4">4</button>
+                    <button type="button" data-key="5">5</button>
+                    <button type="button" data-key="6">6</button>
+                    <button type="button" data-key="7">7</button>
+                    <button type="button" data-key="8">8</button>
+                    <button type="button" data-key="9">9</button>
+                    <button type="button" class="keypad__danger" data-key="clear">×</button>
+                    <button type="button" data-key="0">0</button>
+                    <button type="button" class="keypad__success" data-key="submit">✓</button>
+                </div>
+
+                <p id="rightStatus" class="team-status">AGUARDANDO O INICIO DA PARTIDA</p>
+            </section>
+        </main>
+
+        <div class="zoom-dock">
+            <button id="zoomOutBtn" type="button" aria-label="Diminuir tamanho">−</button>
+            <strong id="zoomValue">100%</strong>
+            <button id="zoomInBtn" type="button" aria-label="Aumentar tamanho">+</button>
+            <button id="fullscreenBtn" type="button" aria-label="Tela cheia">⛶</button>
+            <button id="soundToggleBtn" type="button" aria-label="Ativar ou desativar som">🔊</button>
+        </div>
+
+        <div id="setupBackdrop" class="setup-backdrop"></div>
+
+        <section id="setupModal" class="setup-modal" role="dialog" aria-modal="true" aria-labelledby="setupTitle">
+            <header class="setup-modal__header">
+                <h2 id="setupTitle">PREPARE A PARTIDA</h2>
+
+                <div class="stepper" aria-label="Etapas da configuracao">
+                    <div class="stepper__item is-active" data-step-indicator="1">
+                        <span>1</span>
+                        <strong>OPERACOES</strong>
+                    </div>
+                    <div class="stepper__line"></div>
+                    <div class="stepper__item" data-step-indicator="2">
+                        <span>2</span>
+                        <strong>NIVEL</strong>
+                    </div>
+                    <div class="stepper__line"></div>
+                    <div class="stepper__item" data-step-indicator="3">
+                        <span>3</span>
+                        <strong>EQUIPES</strong>
+                    </div>
+                </div>
+            </header>
+
+            <div class="setup-modal__body">
+                <section class="setup-step" data-step-panel="1">
+                    <div class="setup-copy">
+                        <h3>OPERACOES</h3>
+                        <p>ESCOLHA UMA OU MAIS OPERACOES PARA ESTA PARTIDA.</p>
+                    </div>
+
+                    <div class="selection-grid selection-grid--operations">
+                        <button class="selection-card is-selected" type="button" data-operation="add">
+                            <span class="selection-card__symbol">+</span>
+                            <strong>ADICAO</strong>
+                        </button>
+                        <button class="selection-card" type="button" data-operation="subtract">
+                            <span class="selection-card__symbol">−</span>
+                            <strong>SUBTRACAO</strong>
+                        </button>
+                        <button class="selection-card" type="button" data-operation="multiply">
+                            <span class="selection-card__symbol">×</span>
+                            <strong>MULTIPLICACAO</strong>
+                        </button>
+                        <button class="selection-card" type="button" data-operation="divide">
+                            <span class="selection-card__symbol">÷</span>
+                            <strong>DIVISAO</strong>
+                        </button>
+                    </div>
+                </section>
+
+                <section class="setup-step hidden" data-step-panel="2">
+                    <div class="setup-copy">
+                        <h3>NIVEL E QUANTIDADE</h3>
+                        <p>ESCOLHA A DIFICULDADE E A QUANTIDADE DE OPERACOES POR PARTIDA.</p>
+                    </div>
+
+                    <div class="selection-grid selection-grid--levels">
+                        <button class="selection-card selection-card--level is-selected" type="button" data-level="1">
+                            <span class="selection-card__level-icon">◔</span>
+                            <strong>NIVEL 1</strong>
+                            <small>OPERACOES COM 1 ALGARISMO</small>
+                        </button>
+                        <button class="selection-card selection-card--level" type="button" data-level="2">
+                            <span class="selection-card__level-icon">◑</span>
+                            <strong>NIVEL 2</strong>
+                            <small>2 ALGARISMOS SEM RESERVA</small>
+                        </button>
+                        <button class="selection-card selection-card--level" type="button" data-level="3">
+                            <span class="selection-card__level-icon">◕</span>
+                            <strong>NIVEL 3</strong>
+                            <small>2 ALGARISMOS COM RESERVA</small>
+                        </button>
+                    </div>
+
+                    <div class="quantity-panel">
+                        <div class="setup-copy setup-copy--compact">
+                            <h3>QUANTIDADE DE OPERACOES</h3>
+                            <p>DEFINA QUANTAS RODADAS A PARTIDA TERA.</p>
+                        </div>
+
+                        <div class="quantity-panel__row">
+                            <button class="quantity-chip is-selected" type="button" data-rounds="5">5</button>
+                            <button class="quantity-chip" type="button" data-rounds="10">10</button>
+                            <button class="quantity-chip" type="button" data-rounds="15">15</button>
+                            <button class="quantity-chip" type="button" data-rounds="20">20</button>
+                            <label class="custom-rounds">
+                                <span>OUTRA</span>
+                                <input id="roundsInput" type="number" min="3" max="50" value="5">
+                            </label>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="setup-step hidden" data-step-panel="3">
+                    <div class="setup-copy">
+                        <h3>EQUIPES</h3>
+                    </div>
+
+                    <div class="team-setup-grid">
+                        <article class="team-setup-card team-setup-card--blue">
+                            <img class="team-setup-card__gif" src="./assets/equipe-azul.gif" alt="Equipe azul">
+                            <strong>1ª EQUIPE (AZUL)</strong>
+                            <input id="leftTeamInput" type="text" maxlength="20" placeholder="Nome da equipe">
+                        </article>
+
+                        <div class="team-setup-grid__vs">VS</div>
+
+                        <article class="team-setup-card team-setup-card--red">
+                            <img class="team-setup-card__gif" src="./assets/equipe-vermelha.gif" alt="Equipe vermelha">
+                            <strong>2ª EQUIPE (VERMELHA)</strong>
+                            <input id="rightTeamInput" type="text" maxlength="20" placeholder="Nome da equipe">
+                        </article>
+                    </div>
+
+                    <button id="swapTeamsBtn" class="swap-teams-btn" type="button">INVERTER LADOS</button>
+                </section>
+            </div>
+
+            <footer class="setup-modal__footer">
+                <button id="prevStepBtn" class="secondary-action secondary-action--ghost" type="button">← VOLTAR</button>
+                <button id="nextStepBtn" class="primary-action" type="button">PROXIMO →</button>
+                <button id="startMatchBtn" class="primary-action hidden" type="button">▶ INICIAR PARTIDA</button>
+            </footer>
+        </section>
+    </div>
+
+    <script src="./app.js"></script>
+</body>
+</html>

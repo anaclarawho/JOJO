@@ -24,7 +24,11 @@ window.JOJO_DATA = {
                     label: "Matemática",
                     items: [
                         {
-                            title: "JOGOS DE MATEMÁTICA",
+                            title: "CABO DE GUERRA MATEMÁTICO",
+                            href: "./jogos/cabo-de-guerra/"
+                        },
+                        {
+                            title: "NOVOS JOGOS DE MATEMÁTICA",
                             description: "Em breve.",
                             placeholder: true
                         }
