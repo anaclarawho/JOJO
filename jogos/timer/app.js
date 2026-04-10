@@ -6,6 +6,8 @@ const state = {
     totalSeconds: 0,
     remainingSeconds: 0,
     timerId: null,
+    destinationRotationId: null,
+    destinationAssetIndex: 0,
     isPaused: false,
     soundEnabled: true,
     audioContext: null,
@@ -200,6 +202,31 @@ function formatTime(totalSeconds) {
     return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
 }
 
+function stopDestinationCycle() {
+    if (state.destinationRotationId) {
+        window.clearInterval(state.destinationRotationId);
+        state.destinationRotationId = null;
+    }
+}
+
+function startDestinationCycle() {
+    stopDestinationCycle();
+
+    const mode = getMode();
+    if (!mode || !Array.isArray(mode.destinationAssets) || !mode.destinationAssets.length) {
+        return;
+    }
+
+    state.destinationRotationId = window.setInterval(() => {
+        if (state.isPaused || state.remainingSeconds <= 0) {
+            return;
+        }
+
+        state.destinationAssetIndex = (state.destinationAssetIndex + 1) % mode.destinationAssets.length;
+        renderDestination(mode);
+    }, 3000);
+}
+
 function clampNumber(value, min, max) {
     const parsed = Number.parseInt(value, 10);
     if (Number.isNaN(parsed)) {
@@ -225,10 +252,7 @@ function getProgressRatio() {
 
 function getCurrentDestination(mode) {
     if (Array.isArray(mode.destinationAssets) && mode.destinationAssets.length) {
-        const elapsedSeconds = Math.max(0, state.totalSeconds - state.remainingSeconds);
-        const index = Math.floor(elapsedSeconds / 3) % mode.destinationAssets.length;
-
-        return mode.destinationAssets[index];
+        return mode.destinationAssets[state.destinationAssetIndex % mode.destinationAssets.length];
     }
 
     return {
@@ -240,8 +264,9 @@ function getCurrentDestination(mode) {
 function renderDestination(mode) {
     const destination = getCurrentDestination(mode);
     ui.destinationAsset.src = destination.src;
-    ui.destinationAsset.alt = destination.label;
-    ui.destinationLabel.textContent = destination.label;
+    ui.destinationAsset.alt = destination.label || "";
+    ui.destinationAsset.title = destination.label || "";
+    ui.destinationLabel.textContent = "";
 }
 
 function switchScreen(screen) {
@@ -437,6 +462,8 @@ function stopTimer() {
         window.clearInterval(state.timerId);
         state.timerId = null;
     }
+
+    stopDestinationCycle();
 }
 
 function startCountdown() {
@@ -469,6 +496,7 @@ function startCountdown() {
 function startTimer() {
     state.totalSeconds = getInputSeconds();
     state.remainingSeconds = state.totalSeconds;
+    state.destinationAssetIndex = 0;
 
     if (state.totalSeconds <= 0 || !state.activeMode) {
         updateSetupPreview();
@@ -480,6 +508,7 @@ function startTimer() {
     window.requestAnimationFrame(() => {
         renderTimerScene();
     });
+    startDestinationCycle();
     startCountdown();
 }
 
@@ -501,10 +530,12 @@ function resetCurrentTimer() {
     state.remainingSeconds = state.totalSeconds;
     state.isPaused = false;
     state.tickPhase = 0;
+    state.destinationAssetIndex = 0;
     ui.pauseBtn.disabled = false;
     ui.resumeBtn.disabled = true;
     buildMilestones();
     updateTimerStatus();
+    startDestinationCycle();
 }
 
 function backToHome() {

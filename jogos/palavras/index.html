@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#b8d2ff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="JOJO">
+    <link rel="manifest" href="../../manifest.webmanifest">
+    <link rel="icon" type="image/png" sizes="192x192" href="../../assets/icon-192.png">
+    <link rel="apple-touch-icon" href="../../assets/icon-192.png">
     <title>JOJO | Fluência Leitora - Palavras</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -128,7 +134,10 @@
                 </div>
 
                 <div class="session-side">
-                    <button id="sessionSoundBtn" class="ghost-button ghost-button--small ghost-button--light" type="button" aria-pressed="true">Som ligado</button>
+                    <div class="session-tool-stack">
+                        <button id="sessionSoundBtn" class="ghost-button ghost-button--small ghost-button--light" type="button" aria-pressed="true">Som ligado</button>
+                        <button id="rotateScreenBtn" class="ghost-button ghost-button--small ghost-button--light orientation-button" type="button">Modo horizontal</button>
+                    </div>
                     <div class="session-scoreboard">
                         <div id="shownValue" class="session-scoreboard__value">0/100</div>
                         <div class="session-scoreboard__label">Palavras</div>
@@ -210,5 +219,6 @@
 
     <script src="./data.js"></script>
     <script src="./app.js"></script>
+    <script src="../../scripts/pwa.js"></script>
 </body>
 </html>

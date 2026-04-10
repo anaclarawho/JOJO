@@ -122,6 +122,20 @@ a {
     margin-top: 34px;
 }
 
+.install-app-button {
+    min-height: 58px;
+    margin: 18px auto 0;
+    padding: 0 20px;
+    border: 0;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.94);
+    color: #4370cb;
+    font-family: "Archivo", sans-serif;
+    font-size: 0.98rem;
+    font-weight: 700;
+    box-shadow: var(--shadow-md);
+}
+
 .home-action {
     min-height: 74px;
     border: 0;
@@ -138,6 +152,10 @@ a {
 }
 
 .home-action:active {
+    transform: scale(0.98);
+}
+
+.install-app-button:active {
     transform: scale(0.98);
 }
 

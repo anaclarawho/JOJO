@@ -383,6 +383,16 @@ body.result-active {
     gap: 12px;
 }
 
+.session-tool-stack {
+    display: grid;
+    justify-items: end;
+    gap: 8px;
+}
+
+.orientation-button {
+    display: none;
+}
+
 .session-scoreboard {
     text-align: right;
 }
@@ -663,6 +673,14 @@ body.result-active {
         gap: 8px;
     }
 
+    .session-tool-stack {
+        justify-items: center;
+    }
+
+    .orientation-button {
+        display: inline-flex;
+    }
+
     #sessionSoundBtn {
         min-height: 38px;
         padding-inline: 12px;
@@ -714,6 +732,41 @@ body.result-active {
     .floating-button--finish {
         min-height: 48px;
         padding-inline: 18px;
+    }
+}
+
+@media (orientation: landscape) and (max-width: 960px) {
+    .session-header {
+        grid-template-columns: 56px 1fr auto;
+        align-items: center;
+    }
+
+    .session-side {
+        grid-column: auto;
+        grid-row: auto;
+        justify-items: end;
+    }
+
+    .session-tool-stack {
+        justify-items: end;
+    }
+
+    .word-stage {
+        padding: 16px 18px 104px;
+    }
+
+    .word-display {
+        font-size: clamp(2.4rem, 7vw, 4rem);
+    }
+
+    .floating-button--next {
+        min-width: 92px;
+        min-height: 92px;
+    }
+
+    .floating-button--skip {
+        width: 56px;
+        height: 56px;
     }
 }
 

@@ -4,7 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#b8d2ff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="JOJO">
     <title>JOJO | Fluência Leitora - Textos</title>
+    <link rel="manifest" href="../../manifest.webmanifest">
+    <link rel="icon" type="image/png" sizes="192x192" href="../../assets/icon-192.png">
+    <link rel="apple-touch-icon" href="../../assets/icon-192.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -101,7 +107,11 @@
                     <p id="sessionCode" class="session-caption"></p>
                 </div>
 
-                <button id="sessionSoundBtn" class="ghost-button ghost-button--small ghost-button--light" type="button" aria-pressed="true">Som ligado</button>
+                <div class="session-tools">
+                    <button id="sessionSoundBtn" class="ghost-button ghost-button--small ghost-button--light" type="button" aria-pressed="true">Som ligado</button>
+                    <button id="toggleBoldBtn" class="ghost-button ghost-button--small ghost-button--light" type="button" aria-pressed="false">Texto em negrito</button>
+                    <button id="rotateScreenBtn" class="ghost-button ghost-button--small ghost-button--light orientation-button" type="button">Modo horizontal</button>
+                </div>
             </header>
 
             <section class="surface-card session-summary">
@@ -129,6 +139,13 @@
                 </div>
             </section>
 
+            <div class="control-dock">
+                <button id="startBtn" class="control-button control-button--start" type="button">Iniciar</button>
+                <button id="stopBtn" class="control-button control-button--stop" type="button" disabled>Parar</button>
+                <button id="errorBtn" class="control-button control-button--warn" type="button">+1 Erro</button>
+                <button id="resetBtn" class="control-button control-button--reset" type="button">Reset</button>
+            </div>
+
             <section id="textStep" class="surface-card step-panel">
                 <h3 class="step-title">📖 Leitura do Texto</h3>
 
@@ -147,12 +164,14 @@
                         </div>
                     </article>
 
-                    <article class="info-box info-box--questions">
-                        <h4>❓ Perguntas de compreensão</h4>
-                        <div id="questions" class="question-list"></div>
-                        <button id="checkAnswersBtn" class="primary-button question-check-button" type="button">Verificar respostas</button>
-                        <div id="results" class="results-box hidden"></div>
-                    </article>
+                    <details id="questionsDetails" class="info-box info-box--questions questions-drawer" open>
+                        <summary class="questions-drawer__summary">❓ Perguntas de compreensão</summary>
+                        <div class="questions-drawer__content">
+                            <div id="questions" class="question-list"></div>
+                            <button id="checkAnswersBtn" class="primary-button question-check-button" type="button">Verificar respostas</button>
+                            <div id="results" class="results-box hidden"></div>
+                        </div>
+                    </details>
                 </div>
             </section>
 
@@ -211,13 +230,6 @@
                     </div>
                 </div>
             </section>
-
-            <div class="control-dock">
-                <button id="startBtn" class="control-button control-button--start" type="button">Iniciar</button>
-                <button id="stopBtn" class="control-button control-button--stop" type="button" disabled>Parar</button>
-                <button id="errorBtn" class="control-button control-button--warn" type="button">+1 Erro</button>
-                <button id="resetBtn" class="control-button control-button--reset" type="button">Reset</button>
-            </div>
         </div>
 
         <div id="infoModal" class="modal hidden" aria-hidden="true">
@@ -248,5 +260,6 @@
 
     <script src="./data.js"></script>
     <script src="./app.js"></script>
+    <script src="../../scripts/pwa.js"></script>
 </body>
 </html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#dbe9ff">
+    <title>JOJO | Offline</title>
+    <style>
+        :root {
+            --bg-top: #eef5ff;
+            --bg-bottom: #a9c5fa;
+            --surface: rgba(255, 255, 255, 0.92);
+            --ink: #18212c;
+            --muted: #5d6774;
+            --shadow: 0 24px 60px rgba(72, 103, 168, 0.18);
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            padding: 24px;
+            font-family: Inter, system-ui, sans-serif;
+            color: var(--ink);
+            background:
+                radial-gradient(circle at top left, rgba(255,255,255,0.92), transparent 22%),
+                linear-gradient(180deg, var(--bg-top) 0%, #dce9ff 40%, var(--bg-bottom) 100%);
+        }
+
+        .card {
+            width: min(100%, 520px);
+            padding: 28px 24px;
+            border-radius: 28px;
+            background: var(--surface);
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        img {
+            width: min(42vw, 132px);
+            border-radius: 26px;
+        }
+
+        h1 {
+            margin: 18px 0 12px;
+            font-family: Archivo, Inter, sans-serif;
+            font-size: clamp(2rem, 7vw, 3rem);
+            color: #4aa6e6;
+        }
+
+        p {
+            margin: 0;
+            line-height: 1.6;
+            color: var(--muted);
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 18px;
+            padding: 14px 18px;
+            border-radius: 18px;
+            background: #7a8ef1;
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <section class="card">
+        <img src="./assets/jojo-eyes-logo.png" alt="Logo JOJO">
+        <h1>JOJO</h1>
+        <p>Você está sem internet no momento. Se os jogos já tiverem sido abertos antes, eles continuam funcionando offline.</p>
+        <a href="./">Voltar para a JOJO</a>
+    </section>
+</body>
+</html>

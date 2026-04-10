@@ -552,9 +552,7 @@ input {
 }
 
 .destination-marker span {
-    text-align: center;
-    font-weight: 700;
-    color: #50607a;
+    display: none;
 }
 
 .journey-message {
@@ -782,11 +780,11 @@ input {
     }
 
     .sound-toggle {
-        top: 12px;
-        right: 12px;
+        top: 10px;
+        right: 10px;
         min-height: 44px;
         padding-inline: 14px;
-        font-size: 0.94rem;
+        font-size: 0.88rem;
     }
 
     .screen {
@@ -812,6 +810,17 @@ input {
         line-height: 1.04;
     }
 
+    .top-actions {
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .top-actions .ghost-button {
+        min-height: 42px;
+        padding-inline: 12px;
+        font-size: 0.9rem;
+    }
+
     .mode-grid,
     .input-grid {
         grid-template-columns: 1fr;
@@ -826,24 +835,31 @@ input {
         font-size: 2.2rem;
     }
 
+    .preview-panel {
+        gap: 12px;
+        padding: 16px;
+    }
+
     .countdown-value {
-        font-size: 2.7rem;
+        font-size: 2.4rem;
     }
 
     .journey-track {
-        min-height: 300px;
+        min-height: 240px;
+        padding: 12px 8px 6px;
     }
 
     .destination-marker,
     .destination-marker img {
-        width: 130px;
-        max-width: 130px;
-        height: 130px;
+        width: 108px;
+        max-width: 108px;
+        height: 108px;
     }
 
     .student-marker {
-        width: 92px;
-        height: 92px;
+        width: 76px;
+        height: 76px;
+        top: 72px;
     }
 
     .journey-path,
@@ -852,13 +868,53 @@ input {
         right: 20px;
     }
 
+    .journey-path {
+        top: 126px;
+        height: 10px;
+    }
+
+    .journey-milestones {
+        top: 108px;
+    }
+
+    .journey-message {
+        font-size: 0.95rem;
+    }
+
+    .journey-card {
+        gap: 18px;
+    }
+
+    .journey-card__top,
+    .journey-card__bottom,
+    .time-split {
+        gap: 10px;
+    }
+
+    .progress-badge,
+    .time-split__card {
+        padding: 12px 14px;
+        border-radius: 16px;
+    }
+
+    .progress-badge strong,
+    .time-split__card strong {
+        font-size: 1.3rem;
+    }
+
     .controls {
         display: grid;
         grid-template-columns: 1fr 1fr;
+        position: sticky;
+        bottom: calc(env(safe-area-inset-bottom, 0px) + 8px);
+        z-index: 5;
+        padding-top: 6px;
     }
 
     .control-button {
         min-width: 0;
+        min-height: 46px;
+        font-size: 0.92rem;
     }
 
     .finish-card__actions {

@@ -45,6 +45,7 @@ const STEP_META = {
 const state = {
     soundEnabled: true,
     audioContext: null,
+    textBoldEnabled: false,
     screen: "home",
     selectionView: "years",
     currentYear: null,
@@ -78,6 +79,8 @@ const ui = {
     toggleSoundBtn: document.getElementById("toggleSoundBtn"),
     selectionSoundBtn: document.getElementById("selectionSoundBtn"),
     sessionSoundBtn: document.getElementById("sessionSoundBtn"),
+    toggleBoldBtn: document.getElementById("toggleBoldBtn"),
+    rotateScreenBtn: document.getElementById("rotateScreenBtn"),
     selectionBackBtn: document.getElementById("selectionBackBtn"),
     selectionEyebrow: document.getElementById("selectionEyebrow"),
     selectionTitle: document.getElementById("selectionTitle"),
@@ -99,6 +102,7 @@ const ui = {
     readingText: document.getElementById("readingText"),
     criteriaMaxErrors: document.getElementById("criteriaMaxErrors"),
     criteriaMaxTime: document.getElementById("criteriaMaxTime"),
+    questionsDetails: document.getElementById("questionsDetails"),
     questions: document.getElementById("questions"),
     checkAnswersBtn: document.getElementById("checkAnswersBtn"),
     results: document.getElementById("results"),
@@ -222,6 +226,37 @@ function updateSoundButtons() {
     ui.sessionSoundBtn.setAttribute("aria-pressed", pressed);
 }
 
+function updateBoldButton() {
+    if (!ui.toggleBoldBtn) {
+        return;
+    }
+
+    ui.toggleBoldBtn.textContent = state.textBoldEnabled ? "Negrito ativo" : "Texto em negrito";
+    ui.toggleBoldBtn.setAttribute("aria-pressed", String(state.textBoldEnabled));
+}
+
+function syncTextWeight() {
+    ui.readingText.classList.toggle("is-bold", state.textBoldEnabled);
+    ui.textTitle.classList.toggle("is-bold", state.textBoldEnabled);
+}
+
+function syncQuestionsDrawer(force = false) {
+    if (!ui.questionsDetails) {
+        return;
+    }
+
+    const isMobile = window.innerWidth <= 760;
+
+    if (isMobile) {
+        if (force || ui.questionsDetails.open) {
+            ui.questionsDetails.open = false;
+        }
+        return;
+    }
+
+    ui.questionsDetails.open = true;
+}
+
 function ensureAudioContext() {
     if (state.audioContext || !window.AudioContext) {
         return;
@@ -323,6 +358,32 @@ function toggleSound() {
     if (state.soundEnabled) {
         playUiSound();
     }
+}
+
+function toggleTextBold() {
+    state.textBoldEnabled = !state.textBoldEnabled;
+    updateBoldButton();
+    syncTextWeight();
+    playUiSound();
+}
+
+async function requestLandscapeOrientation() {
+    playUiSound();
+
+    try {
+        if (document.fullscreenElement == null && document.documentElement.requestFullscreen) {
+            await document.documentElement.requestFullscreen();
+        }
+
+        if (screen.orientation?.lock) {
+            await screen.orientation.lock("landscape");
+            return;
+        }
+    } catch (error) {
+        console.warn("Nao foi possivel travar a tela na horizontal.", error);
+    }
+
+    window.alert("Se o celular não girar sozinho, ative a rotação automática e vire o aparelho para a horizontal.");
 }
 
 function resetTimerVisual() {
@@ -526,6 +587,7 @@ function renderTextStep(testData) {
         .split("\n")
         .map((line) => `<p>${escapeHtml(line)}</p>`)
         .join("");
+    syncTextWeight();
     ui.criteriaMaxErrors.textContent = `Máximo de ${testData.maxErrors} erros`;
     ui.criteriaMaxTime.textContent = `Máximo de ${testData.maxTime}`;
     renderQuestions(testData);
@@ -713,6 +775,8 @@ function renderSession() {
     renderStepNavigation(testData);
     renderVisibleStep();
     renderTimerAndErrors();
+    updateBoldButton();
+    syncQuestionsDrawer(true);
 }
 
 function openTest(testIndex) {
@@ -943,6 +1007,8 @@ ui.infoModal.addEventListener("click", (event) => {
 ui.toggleSoundBtn.addEventListener("click", toggleSound);
 ui.selectionSoundBtn.addEventListener("click", toggleSound);
 ui.sessionSoundBtn.addEventListener("click", toggleSound);
+ui.toggleBoldBtn.addEventListener("click", toggleTextBold);
+ui.rotateScreenBtn.addEventListener("click", requestLandscapeOrientation);
 ui.selectionBackBtn.addEventListener("click", goBackFromSelection);
 ui.sessionHomeBtn.addEventListener("click", goHome);
 ui.backToSelectionBtn.addEventListener("click", backToSelection);
@@ -1028,3 +1094,6 @@ document.addEventListener("keydown", (event) => {
 
 resetTimerVisual();
 updateSoundButtons();
+updateBoldButton();
+syncTextWeight();
+window.addEventListener("resize", () => syncQuestionsDrawer(false));

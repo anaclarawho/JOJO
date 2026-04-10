@@ -20,6 +20,7 @@ const ui = {
     closeInfoBtn: document.getElementById("closeInfoBtn"),
     toggleSoundBtn: document.getElementById("toggleSoundBtn"),
     sessionSoundBtn: document.getElementById("sessionSoundBtn"),
+    rotateScreenBtn: document.getElementById("rotateScreenBtn"),
     startButtons: [...document.querySelectorAll("[data-start-mode]")],
     backHomeBtn: document.getElementById("backHomeBtn"),
     nextBtn: document.getElementById("nextBtn"),
@@ -419,6 +420,27 @@ function toggleSound() {
     }
 }
 
+async function requestLandscapeOrientation() {
+    if (state.soundEnabled) {
+        playToggleSound();
+    }
+
+    try {
+        if (document.fullscreenElement == null && document.documentElement.requestFullscreen) {
+            await document.documentElement.requestFullscreen();
+        }
+
+        if (screen.orientation?.lock) {
+            await screen.orientation.lock("landscape");
+            return;
+        }
+    } catch (error) {
+        console.warn("Nao foi possivel ativar o modo horizontal.", error);
+    }
+
+    window.alert("Se o celular não girar sozinho, ative a rotação automática e vire o aparelho para a horizontal.");
+}
+
 function retrySession() {
     if (!state.mode || !state.letter) {
         goHome();
@@ -440,6 +462,7 @@ ui.startButtons.forEach((button) => {
 
 ui.toggleSoundBtn.addEventListener("click", toggleSound);
 ui.sessionSoundBtn.addEventListener("click", toggleSound);
+ui.rotateScreenBtn.addEventListener("click", requestLandscapeOrientation);
 ui.openInfoBtn.addEventListener("click", openInfoModal);
 ui.closeInfoBtn.addEventListener("click", closeInfoModal);
 ui.infoModal.addEventListener("click", (event) => {
