@@ -28,8 +28,7 @@ window.JOJO_DATA = {
                             href: "./jogos/cabo-de-guerra/"
                         },
                         {
-                            title: "NOVOS JOGOS DE MATEMÁTICA",
-                            description: "Em breve.",
+                            title: "EM BREVE",
                             placeholder: true
                         }
                     ]
@@ -46,8 +45,7 @@ window.JOJO_DATA = {
                     href: "./jogos/timer/"
                 },
                 {
-                    title: "NOVAS FERRAMENTAS",
-                    description: "Em breve.",
+                    title: "EM BREVE",
                     placeholder: true
                 }
             ]

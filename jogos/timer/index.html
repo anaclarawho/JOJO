@@ -30,31 +30,26 @@
                 <div class="brand">
                     <img src="./assets/jojo-eyes-logo.png" alt="Logo JOJO" class="brand__logo">
                     <div class="brand__copy">
-                        <p class="eyebrow">JOJO | Ferramentas de apoio</p>
+                        <p class="eyebrow">JOJO</p>
                         <h1>TIMER</h1>
-                        <p class="hero__text">UMA ESPERA MAIS PREVISÍVEL, COM APOIO VISUAL E NÚMEROS GRANDES PARA ACOMPANHAR O TEMPO.</p>
                     </div>
                 </div>
             </header>
 
             <section class="choice-section">
                 <div class="section-heading">
-                    <p class="eyebrow">Primeiro passo</p>
                     <h2>ESCOLHA O TIPO DE TIMER</h2>
-                    <p class="section-text"></p>
                 </div>
 
                 <div class="mode-grid">
                     <button class="mode-card mode-card--lanche" type="button" data-mode="lanche">
                         <span class="mode-card__emoji">🍎</span>
-                        <strong>HORA DO LANCHINHO</strong>
-                        <p>ESPERAR COM APOIO VISUAL ATÉ O MOMENTO DO LANCHE.</p>
+                        <strong>TÁ QUASE NA HORA DO LANCHINHO</strong>
                     </button>
 
                     <button class="mode-card mode-card--casa" type="button" data-mode="casa">
                         <span class="mode-card__emoji">🏠</span>
-                        <strong>HORA DE IR PARA CASA</strong>
-                        <p>ESPERAR COM CLAREZA ATÉ O MOMENTO DE IR EMBORA.</p>
+                        <strong>TÁ QUASE NA HORA DE IR PARA CASA</strong>
                     </button>
                 </div>
             </section>
@@ -111,7 +106,7 @@
                         <span class="mini-label">Tempo restante</span>
                         <strong id="countdownValue" class="countdown-value">00:15:00</strong>
                     </div>
-                    <div class="progress-badge">
+                    <div class="progress-badge hidden" aria-hidden="true">
                         <span class="mini-label">Progresso</span>
                         <strong id="progressPercent">0%</strong>
                     </div>
@@ -135,7 +130,7 @@
                 <div class="journey-card__bottom">
                     <p id="journeyMessage" class="journey-message"></p>
                     <div class="time-split">
-                        <article class="time-split__card">
+                        <article class="time-split__card hidden" aria-hidden="true">
                             <span class="mini-label">Total</span>
                             <strong id="totalTimeValue">00:15:00</strong>
                         </article>

@@ -2,10 +2,10 @@ window.JOJO_TIMER_DATA = {
     modes: {
         lanche: {
             id: "lanche",
-            eyebrow: "FERRAMENTA DE APOIO",
-            title: "HORA DO LANCHINHO",
+            eyebrow: "",
+            title: "TÁ QUASE NA HORA DO LANCHINHO",
             subtitle: "",
-            cardDescription: "UM TIMER PARA AJUDAR NA ESPERA ATÉ O LANCHE.",
+            cardDescription: "",
             accentClass: "is-lanche",
             emoji: "🍎",
             destinationAssets: [
@@ -16,13 +16,13 @@ window.JOJO_TIMER_DATA = {
                 { src: "./assets/tacos.gif", label: "Tacos" },
                 { src: "./assets/carnes.gif", label: "Carnes" }
             ],
-            progressTitle: "INDO PARA A COMIDA",
+            progressTitle: "",
             progressMessages: [
-                "Agora começou. Vamos caminhando com calma.",
-                "Muito bem. O tempo já está andando.",
-                "Metade do caminho! Continue esperando.",
-                "Falta pouquinho. Já estamos quase lá.",
-                "Chegou a hora do lanchinho!"
+                "",
+                "",
+                "",
+                "",
+                ""
             ],
             finishTitle: "HORA DO LANCHINHO!",
             finishText: "O TEMPO ACABOU. AGORA É HORA DO LANCHINHO.",
@@ -34,21 +34,21 @@ window.JOJO_TIMER_DATA = {
         },
         casa: {
             id: "casa",
-            eyebrow: "FERRAMENTA DE APOIO",
-            title: "HORA DE IR PARA CASA",
+            eyebrow: "",
+            title: "TÁ QUASE NA HORA DE IR PARA CASA",
             subtitle: "",
-            cardDescription: "UM TIMER PARA A ESPERA ATÉ IR PARA CASA.",
+            cardDescription: "",
             accentClass: "is-casa",
             emoji: "🏠",
             destinationLabel: "CHEGADA EM CASA",
             destinationAsset: "./assets/casa.gif",
-            progressTitle: "VOLTANDO PARA CASA",
+            progressTitle: "",
             progressMessages: [
-                "Agora começou. Vamos esperar com tranquilidade.",
-                "O tempo está passando direitinho.",
-                "Metade do caminho. Já estamos avançando.",
-                "Falta bem pouquinho para ir embora.",
-                "Chegou a hora de ir pra casa!"
+                "",
+                "",
+                "",
+                "",
+                ""
             ],
             finishTitle: "HORA DE IR PARA CASA!",
             finishText: "O TEMPO ACABOU. AGORA É HORA DE IR EMBORA.",

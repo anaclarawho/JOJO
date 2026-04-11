@@ -134,6 +134,6 @@ window.addEventListener("appinstalled", () => {
 registerServiceWorker();
 bindInstallButton();
 
-if (!isStandaloneMode()) {
+if (!isStandaloneMode() && /iphone|ipad|ipod/i.test(window.navigator.userAgent)) {
     showInstallButton();
 }

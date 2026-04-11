@@ -209,6 +209,13 @@ function stopDestinationCycle() {
     }
 }
 
+function stopCountdown() {
+    if (state.timerId) {
+        window.clearInterval(state.timerId);
+        state.timerId = null;
+    }
+}
+
 function startDestinationCycle() {
     stopDestinationCycle();
 
@@ -458,16 +465,12 @@ function renderFinishVisuals(mode) {
 }
 
 function stopTimer() {
-    if (state.timerId) {
-        window.clearInterval(state.timerId);
-        state.timerId = null;
-    }
-
+    stopCountdown();
     stopDestinationCycle();
 }
 
 function startCountdown() {
-    stopTimer();
+    stopCountdown();
     state.isPaused = false;
     state.tickPhase = 0;
     ensureAudioReady();

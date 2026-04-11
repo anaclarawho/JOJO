@@ -232,7 +232,10 @@ input {
 }
 
 .section-text:empty,
-.preview-panel__hint:empty {
+.preview-panel__hint:empty,
+.timer-status-text:empty,
+.journey-message:empty,
+.eyebrow:empty {
     display: none;
 }
 
@@ -302,6 +305,10 @@ input {
 .mode-card p {
     color: rgba(255, 255, 255, 0.94);
     text-transform: uppercase;
+}
+
+.mode-card p:empty {
+    display: none;
 }
 
 .setup-card {
@@ -752,25 +759,32 @@ input {
     }
 
     .journey-track {
-        min-height: 340px;
-        padding-bottom: 10px;
+        min-height: 250px;
+        padding: 6px 0 10px;
     }
 
     .journey-path,
     .journey-milestones {
-        left: 30px;
-        right: 30px;
+        left: 20px;
+        right: 138px;
     }
 
     .destination-marker {
-        position: relative;
-        right: auto;
-        top: auto;
-        margin: 30px auto 0;
+        right: 0;
+        top: 18px;
+        width: 128px;
+        gap: 0;
+    }
+
+    .destination-marker img {
+        max-width: 120px;
+        height: 120px;
     }
 
     .student-marker {
-        top: 46px;
+        top: 62px;
+        width: 92px;
+        height: 92px;
     }
 }
 
@@ -845,36 +859,45 @@ input {
     }
 
     .journey-track {
-        min-height: 240px;
-        padding: 12px 8px 6px;
+        min-height: 190px;
+        padding: 0 0 2px;
     }
 
-    .destination-marker,
+    .journey-scene {
+        padding: 0;
+    }
+
+    .destination-marker {
+        right: 0;
+        top: 30px;
+        width: 92px;
+    }
+
     .destination-marker img {
-        width: 108px;
-        max-width: 108px;
-        height: 108px;
+        width: 92px;
+        max-width: 92px;
+        height: 92px;
     }
 
     .student-marker {
-        width: 76px;
-        height: 76px;
-        top: 72px;
+        width: 68px;
+        height: 68px;
+        top: 58px;
     }
 
     .journey-path,
     .journey-milestones {
-        left: 20px;
-        right: 20px;
+        left: 10px;
+        right: 90px;
     }
 
     .journey-path {
-        top: 126px;
-        height: 10px;
+        top: 104px;
+        height: 8px;
     }
 
     .journey-milestones {
-        top: 108px;
+        top: 90px;
     }
 
     .journey-message {
@@ -889,6 +912,10 @@ input {
     .journey-card__bottom,
     .time-split {
         gap: 10px;
+    }
+
+    .journey-card__top {
+        align-items: flex-start;
     }
 
     .progress-badge,
