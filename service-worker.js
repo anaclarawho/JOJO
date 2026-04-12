@@ -1,4 +1,4 @@
-const CACHE_VERSION = "jojo-v2026-04-11-1";
+const CACHE_VERSION = "jojo-static-v2026-04-11-2";
 const APP_SHELL = [
     "./",
     "./index.html",

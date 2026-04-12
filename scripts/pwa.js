@@ -78,7 +78,10 @@ function registerServiceWorker() {
     const serviceWorkerUrl = new URL("service-worker.js", rootUrl);
 
     navigator.serviceWorker.register(serviceWorkerUrl, {
-        scope: rootUrl.pathname
+        scope: rootUrl.pathname,
+        updateViaCache: "none"
+    }).then((registration) => {
+        registration.update().catch(() => {});
     }).catch((error) => {
         console.warn("Nao foi possivel registrar o modo offline.", error);
     });
