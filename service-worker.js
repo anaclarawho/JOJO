@@ -1,4 +1,4 @@
-const CACHE_VERSION = "jojo-static-v2026-04-11-2";
+const CACHE_VERSION = "jojo-static-v2026-04-17-1";
 const APP_SHELL = [
     "./",
     "./index.html",
@@ -48,7 +48,7 @@ const APP_SHELL = [
     "./jogos/cabo-de-guerra/app.js",
     "./jogos/cabo-de-guerra/gif-frame.html",
     "./jogos/cabo-de-guerra/assets/jojo-eyes-logo.png",
-    "./jogos/cabo-de-guerra/assets/cabo-de-guerra-correto.gif",
+    "./jogos/cabo-de-guerra/assets/cabo-de-guerra-2.gif",
     "./jogos/cabo-de-guerra/assets/equipe-azul.gif",
     "./jogos/cabo-de-guerra/assets/equipe-vermelha.gif",
     "./jogos/cabo-de-guerra/assets/ganhou-azul.gif",
