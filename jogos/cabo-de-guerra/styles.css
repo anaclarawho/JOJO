@@ -378,10 +378,10 @@ button {
 .rope-wrapper {
     position: absolute;
     left: calc(50% + var(--rope-shift));
-    top: 56%;
+    top: 55%;
     bottom: auto;
     z-index: 1;
-    width: min(92%, 900px);
+    width: min(86%, 760px);
     padding: 0;
     border: 0;
     border-radius: 0;
@@ -398,7 +398,7 @@ button {
 .rope-wrapper__frame {
     display: block;
     width: 100%;
-    height: min(44vw, 360px);
+    height: min(36vw, 260px);
     border: 0;
     background: transparent;
     pointer-events: none;
@@ -944,11 +944,11 @@ button {
     }
 
     .rope-wrapper {
-        width: min(94%, 760px);
+        width: min(88%, 680px);
     }
 
     .rope-wrapper__frame {
-        height: min(38vw, 300px);
+        height: min(32vw, 220px);
     }
 }
 
@@ -1093,12 +1093,12 @@ button {
     }
 
     .rope-wrapper {
-        top: 54%;
-        width: min(96%, 640px);
+        top: 53%;
+        width: min(88%, 520px);
     }
 
     .rope-wrapper__frame {
-        height: min(36vw, 220px);
+        height: min(30vw, 180px);
     }
 
     .round-feedback {
@@ -1287,12 +1287,12 @@ button {
     }
 
     .rope-wrapper {
-        top: 55%;
-        width: min(96%, 420px);
+        top: 54%;
+        width: min(88%, 340px);
     }
 
     .rope-wrapper__frame {
-        height: min(40vw, 146px);
+        height: min(29vw, 112px);
     }
 
     .round-feedback {
