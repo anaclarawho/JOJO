@@ -2,10 +2,10 @@ const STORAGE_KEY = "jojo_math_tug_teams_v1";
 const STANDARD_ROUNDS = [5, 10, 15, 20];
 
 const OPERATION_META = {
-    add: { label: "ADICAO", symbol: "+" },
-    subtract: { label: "SUBTRACAO", symbol: "-" },
-    multiply: { label: "MULTIPLICACAO", symbol: "X" },
-    divide: { label: "DIVISAO", symbol: "÷" },
+    add: { label: "ADIÇÃO", symbol: "+" },
+    subtract: { label: "SUBTRAÇÃO", symbol: "-" },
+    multiply: { label: "MULTIPLICAÇÃO", symbol: "×" },
+    divide: { label: "DIVISÃO", symbol: "÷" },
 };
 
 const refs = {
@@ -110,8 +110,8 @@ function createGameState() {
             right: null,
         },
         statuses: {
-            left: { text: "AGUARDANDO CONFIGURACAO", tone: "" },
-            right: { text: "AGUARDANDO CONFIGURACAO", tone: "" },
+            left: { text: "AGUARDANDO CONFIGURAÇÃO", tone: "" },
+            right: { text: "AGUARDANDO CONFIGURAÇÃO", tone: "" },
         },
         startedAt: 0,
     };
@@ -199,7 +199,7 @@ function loadSavedTeams() {
             state.config.teamNames.right = saved.right;
         }
     } catch (error) {
-        console.warn("Nao foi possivel carregar as equipes salvas.", error);
+        console.warn("Não foi possível carregar as equipes salvas.", error);
     }
 
     refs.leftTeamInput.value = state.config.teamNames.left;
@@ -289,10 +289,14 @@ async function toggleFullscreen() {
         }
         playTone("step");
     } catch (error) {
-        console.warn("Nao foi possivel alternar a tela cheia.", error);
+        console.warn("Não foi possível alternar a tela cheia.", error);
     } finally {
         renderZoomControls();
     }
+}
+
+function syncFullscreenState() {
+    refs.app.classList.toggle("is-fullscreen", Boolean(document.fullscreenElement));
 }
 
 function toggleSound() {
@@ -308,6 +312,7 @@ function renderZoomControls() {
     refs.soundToggleBtn.textContent = state.ui.soundOn ? "🔊" : "🔇";
     refs.soundToggleBtn.classList.toggle("is-muted", !state.ui.soundOn);
     refs.fullscreenBtn.textContent = document.fullscreenElement ? "🡽" : "⛶";
+    syncFullscreenState();
 }
 
 function saveTeams() {
@@ -562,7 +567,7 @@ function finishMatch() {
     renderGame();
 
     let title = "EMPATE";
-    let text = "AS DUAS EQUIPES TERMINARAM COM A MESMA PONTUACAO.";
+    let text = "AS DUAS EQUIPES TERMINARAM COM A MESMA PONTUAÇÃO.";
 
     if (state.game.leftScore > state.game.rightScore) {
         title = `${state.config.teamNames.left} VENCEU`;
@@ -668,15 +673,23 @@ function renderGame() {
 function renderNames() {
     refs.leftPanelName.textContent = state.config.teamNames.left;
     refs.rightPanelName.textContent = state.config.teamNames.right;
-    refs.leftArenaName.textContent = state.config.teamNames.left;
-    refs.rightArenaName.textContent = state.config.teamNames.right;
+    if (refs.leftArenaName) {
+        refs.leftArenaName.textContent = state.config.teamNames.left;
+    }
+    if (refs.rightArenaName) {
+        refs.rightArenaName.textContent = state.config.teamNames.right;
+    }
 }
 
 function renderScores() {
     refs.leftScoreBadge.textContent = state.game.leftScore;
     refs.rightScoreBadge.textContent = state.game.rightScore;
-    refs.leftArenaScore.textContent = state.game.leftScore;
-    refs.rightArenaScore.textContent = state.game.rightScore;
+    if (refs.leftArenaScore) {
+        refs.leftArenaScore.textContent = state.game.leftScore;
+    }
+    if (refs.rightArenaScore) {
+        refs.rightArenaScore.textContent = state.game.rightScore;
+    }
 
     const leadingScore = Math.max(state.game.leftScore, state.game.rightScore);
     refs.roundCounter.textContent = `${leadingScore} / ${state.config.rounds}`;
@@ -696,6 +709,9 @@ function renderStatuses() {
     ["left", "right"].forEach((side) => {
         const target = side === "left" ? refs.leftStatus : refs.rightStatus;
         const status = state.game.statuses[side];
+        if (!target) {
+            return;
+        }
         target.textContent = status.text;
         target.classList.remove("is-win", "is-waiting", "is-error");
         if (status.tone) {

@@ -20,9 +20,18 @@
     <div class="app-shell">
         <div id="homeScreen" class="screen screen--home">
             <div class="home-top-actions">
-                <a class="ghost-button ghost-button--pill" href="../../">Voltar à JOJO</a>
-                <button id="openInfoBtn" class="ghost-button ghost-button--pill" type="button">Como funciona</button>
-                <button id="toggleSoundBtn" class="ghost-button ghost-button--pill" type="button" aria-pressed="true">Som ligado</button>
+                <a class="ghost-button ghost-button--pill utility-button" href="../../" aria-label="Voltar à JOJO">
+                    <span aria-hidden="true">⌂</span>
+                    <span class="sr-only">Voltar à JOJO</span>
+                </a>
+                <button id="openInfoBtn" class="ghost-button ghost-button--pill utility-button" type="button" aria-label="Abrir ajuda">
+                    <span aria-hidden="true">?</span>
+                    <span class="sr-only">Abrir ajuda</span>
+                </button>
+                <button id="toggleSoundBtn" class="ghost-button ghost-button--pill utility-button" type="button" aria-pressed="true" aria-label="Som ligado">
+                    <span aria-hidden="true">🔊</span>
+                    <span class="sr-only">Som ligado</span>
+                </button>
             </div>
 
             <div class="home-decor" aria-hidden="true">
@@ -40,16 +49,14 @@
                     <div class="brand__copy">
                         <p class="eyebrow">JOJO | Língua Portuguesa</p>
                         <h1>Simulado de Fluência Leitora</h1>
-                        <p class="hero__text">Escolha o ano escolar e monte sua sessão com texto, palavras e pseudopalavras.</p>
                     </div>
                 </div>
             </header>
 
             <section class="mode-section">
                 <div class="section-heading section-heading--stack">
-                    <p class="eyebrow">Começo</p>
-                    <h2>Escolha o ano escolar</h2>
-                    <p class="section-text">Cada ano traz testes com leitura, compreensão e progressão de dificuldade.</p>
+                    <p class="eyebrow">🧭</p>
+                    <h2>Ano escolar</h2>
                 </div>
 
                 <div class="year-grid">
@@ -84,15 +91,23 @@
 
         <div id="selectionScreen" class="screen screen--selection hidden">
             <div class="home-top-actions">
-                <button id="selectionBackBtn" class="ghost-button ghost-button--pill" type="button">Voltar</button>
-                <button id="selectionInfoBtn" class="ghost-button ghost-button--pill" type="button">Como funciona</button>
-                <button id="selectionSoundBtn" class="ghost-button ghost-button--pill" type="button" aria-pressed="true">Som ligado</button>
+                <button id="selectionBackBtn" class="ghost-button ghost-button--pill utility-button" type="button" aria-label="Voltar">
+                    <span aria-hidden="true">←</span>
+                    <span class="sr-only">Voltar</span>
+                </button>
+                <button id="selectionInfoBtn" class="ghost-button ghost-button--pill utility-button" type="button" aria-label="Abrir ajuda">
+                    <span aria-hidden="true">?</span>
+                    <span class="sr-only">Abrir ajuda</span>
+                </button>
+                <button id="selectionSoundBtn" class="ghost-button ghost-button--pill utility-button" type="button" aria-pressed="true" aria-label="Som ligado">
+                    <span aria-hidden="true">🔊</span>
+                    <span class="sr-only">Som ligado</span>
+                </button>
             </div>
 
             <section class="surface-card selection-panel">
                 <p id="selectionEyebrow" class="eyebrow"></p>
                 <h2 id="selectionTitle"></h2>
-                <p id="selectionSubtitle" class="section-text"></p>
                 <div id="selectionGrid" class="selection-card-grid"></div>
             </section>
         </div>
@@ -108,9 +123,18 @@
                 </div>
 
                 <div class="session-tools">
-                    <button id="sessionSoundBtn" class="ghost-button ghost-button--small ghost-button--light" type="button" aria-pressed="true">Som ligado</button>
-                    <button id="toggleBoldBtn" class="ghost-button ghost-button--small ghost-button--light" type="button" aria-pressed="false">Texto em negrito</button>
-                    <button id="rotateScreenBtn" class="ghost-button ghost-button--small ghost-button--light orientation-button" type="button">Modo horizontal</button>
+                    <button id="sessionSoundBtn" class="ghost-button ghost-button--small ghost-button--light utility-button utility-button--light" type="button" aria-pressed="true" aria-label="Som ligado">
+                        <span aria-hidden="true">🔊</span>
+                        <span class="sr-only">Som ligado</span>
+                    </button>
+                    <button id="toggleBoldBtn" class="ghost-button ghost-button--small ghost-button--light utility-button utility-button--light" type="button" aria-pressed="false" aria-label="Ativar texto em negrito">
+                        <span aria-hidden="true">𝐁</span>
+                        <span class="sr-only">Ativar texto em negrito</span>
+                    </button>
+                    <button id="rotateScreenBtn" class="ghost-button ghost-button--small ghost-button--light orientation-button utility-button utility-button--light" type="button" aria-label="Girar para horizontal">
+                        <span aria-hidden="true">↔</span>
+                        <span class="sr-only">Girar para horizontal</span>
+                    </button>
                 </div>
             </header>
 
@@ -238,7 +262,7 @@
                 <div class="modal__header">
                     <div>
                         <p class="eyebrow">Informações</p>
-                        <h2 id="infoTitle">Como funciona o simulado</h2>
+                        <h2 id="infoTitle">Ajuda</h2>
                     </div>
                     <button id="closeInfoBtn" class="icon-button" type="button" aria-label="Fechar">×</button>
                 </div>

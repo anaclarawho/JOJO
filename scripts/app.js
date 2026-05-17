@@ -1,6 +1,7 @@
 const state = {
     activeSection: null,
-    activeTab: null
+    activeTab: null,
+    lastTrigger: null
 };
 
 const sections = window.JOJO_DATA.sections;
@@ -16,10 +17,6 @@ const ui = {
     closeButton: document.getElementById("sheetCloseBtn"),
     homeButtons: [...document.querySelectorAll("[data-section]")]
 };
-
-function isDesktop() {
-    return window.matchMedia("(min-width: 900px)").matches;
-}
 
 function escapeHtml(value) {
     return value
@@ -61,12 +58,13 @@ function renderInfoCard(card) {
     `;
 }
 
-function openSheet(sectionKey) {
+function openSheet(sectionKey, trigger = null) {
     const section = sections[sectionKey];
     if (!section) {
         return;
     }
 
+    state.lastTrigger = trigger;
     state.activeSection = sectionKey;
     state.activeTab = section.type === "tabs" ? section.tabs[0]?.id || null : null;
 
@@ -76,6 +74,10 @@ function openSheet(sectionKey) {
     ui.backdrop.classList.remove("hidden");
     ui.sheet.setAttribute("aria-hidden", "false");
     ui.body.classList.add("sheet-open");
+
+    requestAnimationFrame(() => {
+        ui.closeButton.focus();
+    });
 }
 
 function closeSheet() {
@@ -85,6 +87,11 @@ function closeSheet() {
     ui.body.classList.remove("sheet-open");
     state.activeSection = null;
     state.activeTab = null;
+
+    if (state.lastTrigger) {
+        state.lastTrigger.focus();
+    }
+    state.lastTrigger = null;
 }
 
 function renderTabs(section) {
@@ -98,11 +105,14 @@ function renderTabs(section) {
     ui.sheetTabs.innerHTML = section.tabs
         .map((tab) => `
             <button
+                id="tab-${tab.id}"
                 class="tab-button ${tab.id === state.activeTab ? "is-active" : ""}"
                 type="button"
                 data-tab="${tab.id}"
                 role="tab"
+                tabindex="${tab.id === state.activeTab ? "0" : "-1"}"
                 aria-selected="${tab.id === state.activeTab}"
+                aria-controls="tabpanel-${tab.id}"
             >
                 ${escapeHtml(tab.label)}
             </button>
@@ -113,9 +123,16 @@ function renderTabs(section) {
 function renderContent(section) {
     if (section.type === "tabs") {
         const activeTab = section.tabs.find((tab) => tab.id === state.activeTab) || section.tabs[0];
+        ui.sheetContent.setAttribute("role", "tabpanel");
+        ui.sheetContent.setAttribute("id", `tabpanel-${activeTab.id}`);
+        ui.sheetContent.setAttribute("aria-labelledby", `tab-${activeTab.id}`);
         ui.sheetContent.innerHTML = activeTab.items.map(renderListCard).join("");
         return;
     }
+
+    ui.sheetContent.removeAttribute("role");
+    ui.sheetContent.removeAttribute("id");
+    ui.sheetContent.removeAttribute("aria-labelledby");
 
     if (section.type === "list") {
         ui.sheetContent.innerHTML = section.items.map(renderListCard).join("");
@@ -138,7 +155,7 @@ function renderSheet() {
 }
 
 ui.homeButtons.forEach((button) => {
-    button.addEventListener("click", () => openSheet(button.dataset.section));
+    button.addEventListener("click", () => openSheet(button.dataset.section, button));
 });
 
 ui.closeButton.addEventListener("click", closeSheet);
@@ -152,6 +169,37 @@ ui.sheetTabs.addEventListener("click", (event) => {
 
     state.activeTab = button.dataset.tab;
     renderSheet();
+});
+
+ui.sheetTabs.addEventListener("keydown", (event) => {
+    const tabs = [...ui.sheetTabs.querySelectorAll("[data-tab]")];
+    if (!tabs.length) {
+        return;
+    }
+
+    const currentIndex = tabs.findIndex((tab) => tab.dataset.tab === state.activeTab);
+    if (currentIndex === -1) {
+        return;
+    }
+
+    let nextIndex = currentIndex;
+
+    if (event.key === "ArrowRight") {
+        nextIndex = (currentIndex + 1) % tabs.length;
+    } else if (event.key === "ArrowLeft") {
+        nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+    } else if (event.key === "Home") {
+        nextIndex = 0;
+    } else if (event.key === "End") {
+        nextIndex = tabs.length - 1;
+    } else {
+        return;
+    }
+
+    event.preventDefault();
+    state.activeTab = tabs[nextIndex].dataset.tab;
+    renderSheet();
+    ui.sheetTabs.querySelector(`[data-tab="${state.activeTab}"]`)?.focus();
 });
 
 document.addEventListener("keydown", (event) => {

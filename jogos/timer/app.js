@@ -179,7 +179,10 @@ function playEnableSound() {
 }
 
 function updateSoundButton() {
-    ui.soundToggleBtn.textContent = state.soundEnabled ? "🔊 Som ligado" : "🔇 Sem som";
+    const icon = state.soundEnabled ? "🔊" : "🔇";
+    const label = state.soundEnabled ? "Som ligado" : "Som desligado";
+    ui.soundToggleBtn.innerHTML = `<span aria-hidden="true">${icon}</span><span class="sr-only">${label}</span>`;
+    ui.soundToggleBtn.setAttribute("aria-label", label);
     ui.soundToggleBtn.setAttribute("aria-pressed", String(state.soundEnabled));
 }
 
@@ -381,20 +384,36 @@ function updateMilestones(progressRatio) {
     });
 }
 
-function updateStudentPosition(progressRatio) {
+function getJourneyMetrics() {
     const track = ui.journeyBasePath.parentElement;
     const trackRect = track.getBoundingClientRect();
     const pathRect = ui.journeyBasePath.getBoundingClientRect();
     const markerRect = ui.studentMarker.getBoundingClientRect();
 
-    if (!trackRect.width || !markerRect.width || !pathRect.width) {
+    if (!trackRect.width || !pathRect.width || !markerRect.width) {
+        return null;
+    }
+
+    const pathLeft = pathRect.left - trackRect.left;
+    const pathWidth = pathRect.width;
+    const markerStart = Math.max(0, pathLeft - markerRect.width * 0.12);
+    const markerEnd = Math.max(markerStart, pathLeft + pathWidth - markerRect.width * 0.86);
+
+    return {
+        pathLeft,
+        pathWidth,
+        markerStart,
+        markerEnd
+    };
+}
+
+function updateStudentPosition(progressRatio) {
+    const metrics = getJourneyMetrics();
+    if (!metrics) {
         return;
     }
 
-    const start = Math.max(0, pathRect.left - trackRect.left - markerRect.width * 0.12);
-    const end = Math.max(start, pathRect.right - trackRect.left - markerRect.width * 0.86);
-    const left = start + (end - start) * progressRatio;
-
+    const left = metrics.markerStart + (metrics.markerEnd - metrics.markerStart) * progressRatio;
     ui.studentMarker.style.left = `${left}px`;
 }
 
@@ -423,6 +442,7 @@ function updateTimerStatus() {
     const mode = getMode();
     const progressRatio = getProgressRatio();
     const elapsed = state.totalSeconds - state.remainingSeconds;
+    const metrics = getJourneyMetrics();
 
     renderDestination(mode);
     ui.countdownValue.textContent = formatTime(state.remainingSeconds);
@@ -430,8 +450,13 @@ function updateTimerStatus() {
     ui.elapsedTimeValue.textContent = formatTime(elapsed);
     ui.progressPercent.textContent = `${Math.round(progressRatio * 100)}%`;
     ui.journeyMessage.textContent = getJourneyMessage(progressRatio);
-    ui.journeyProgress.style.width = `${progressRatio * 100}%`;
     ui.timerStatusText.textContent = state.isPaused ? "Timer pausado" : getJourneyMessage(progressRatio);
+
+    if (metrics) {
+        ui.journeyProgress.style.left = `${metrics.pathLeft}px`;
+        ui.journeyProgress.style.width = `${metrics.pathWidth * progressRatio}px`;
+    }
+
     updateMilestones(progressRatio);
     updateStudentPosition(progressRatio);
 }
@@ -605,7 +630,7 @@ ui.infoModal.addEventListener("click", (event) => {
 
 window.addEventListener("resize", () => {
     if (!ui.timerScreen.classList.contains("hidden")) {
-        updateStudentPosition(getProgressRatio());
+        updateTimerStatus();
     }
 });
 

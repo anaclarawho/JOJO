@@ -52,13 +52,13 @@ window.JOJO_DATA = {
         },
         freeReading: {
             eyebrow: "Leitura livre",
-            title: "Espaço reservado",
+            title: "Em breve",
             type: "info",
             cards: [
                 {
                     title: "Leitura livre",
                     description: "Em breve.",
-                    tag: "Em breve"
+                    tag: "JOJO"
                 }
             ]
         },
@@ -69,8 +69,8 @@ window.JOJO_DATA = {
             cards: [
                 {
                     title: "Plataforma JOJO",
-                    description: "Plataforma de jogos e ferramentas assistivas. Mais informações em breve.",
-                    tag: "Em breve"
+                    description: "Jogos e ferramentas assistivas.",
+                    tag: "JOJO"
                 }
             ]
         }

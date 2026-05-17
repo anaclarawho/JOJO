@@ -56,6 +56,18 @@ a {
     display: none !important;
 }
 
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
 .app-shell {
     width: min(100%, 1260px);
     min-height: 100vh;
@@ -141,6 +153,23 @@ a {
     background: rgba(255, 255, 255, 0.18);
     color: #fff;
     backdrop-filter: blur(10px);
+}
+
+.utility-button {
+    width: 48px;
+    min-width: 48px;
+    min-height: 48px;
+    padding: 0;
+    border-radius: 999px;
+    font-size: 1.15rem;
+    line-height: 1;
+}
+
+.utility-button--light {
+    width: 40px;
+    min-width: 40px;
+    min-height: 40px;
+    font-size: 1rem;
 }
 
 .primary-button {
@@ -301,6 +330,17 @@ a {
     line-height: 1.6;
 }
 
+.hero__text,
+.section-text {
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.hero__text:empty,
+.section-text:empty {
+    display: none;
+}
+
 .section-heading {
     display: grid;
     gap: 8px;
@@ -443,9 +483,9 @@ a {
 
 .selection-card {
     display: grid;
-    gap: 10px;
+    gap: 8px;
     align-content: start;
-    min-height: 172px;
+    min-height: 144px;
     padding: 20px 18px;
     border-radius: 24px;
     background: linear-gradient(135deg, rgba(92, 83, 232, 0.96) 0%, rgba(76, 132, 244, 0.94) 100%);
@@ -484,12 +524,6 @@ a {
     font-weight: 800;
     letter-spacing: 0.05em;
     text-transform: uppercase;
-}
-
-.selection-card__meta {
-    font-size: 0.95rem;
-    line-height: 1.5;
-    color: rgba(255, 255, 255, 0.9);
 }
 
 .session-header {
@@ -1235,6 +1269,12 @@ a {
         min-height: 40px;
         padding-inline: 10px;
         font-size: 0.82rem;
+    }
+
+    .session-tools .utility-button {
+        min-width: 40px;
+        padding: 0;
+        font-size: 0.95rem;
     }
 
     .year-card,

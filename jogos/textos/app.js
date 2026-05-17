@@ -84,7 +84,6 @@ const ui = {
     selectionBackBtn: document.getElementById("selectionBackBtn"),
     selectionEyebrow: document.getElementById("selectionEyebrow"),
     selectionTitle: document.getElementById("selectionTitle"),
-    selectionSubtitle: document.getElementById("selectionSubtitle"),
     selectionGrid: document.getElementById("selectionGrid"),
     sessionHomeBtn: document.getElementById("sessionHomeBtn"),
     sessionEyebrow: document.getElementById("sessionEyebrow"),
@@ -216,11 +215,16 @@ function switchScreen(nextScreen) {
 }
 
 function updateSoundButtons() {
+    const icon = state.soundEnabled ? "🔊" : "🔇";
     const label = state.soundEnabled ? "Som ligado" : "Som desligado";
     const pressed = String(state.soundEnabled);
-    ui.toggleSoundBtn.textContent = label;
-    ui.selectionSoundBtn.textContent = label;
-    ui.sessionSoundBtn.textContent = label;
+    const markup = `<span aria-hidden="true">${icon}</span><span class="sr-only">${label}</span>`;
+    ui.toggleSoundBtn.innerHTML = markup;
+    ui.selectionSoundBtn.innerHTML = markup;
+    ui.sessionSoundBtn.innerHTML = markup;
+    ui.toggleSoundBtn.setAttribute("aria-label", label);
+    ui.selectionSoundBtn.setAttribute("aria-label", label);
+    ui.sessionSoundBtn.setAttribute("aria-label", label);
     ui.toggleSoundBtn.setAttribute("aria-pressed", pressed);
     ui.selectionSoundBtn.setAttribute("aria-pressed", pressed);
     ui.sessionSoundBtn.setAttribute("aria-pressed", pressed);
@@ -231,7 +235,9 @@ function updateBoldButton() {
         return;
     }
 
-    ui.toggleBoldBtn.textContent = state.textBoldEnabled ? "Negrito ativo" : "Texto em negrito";
+    const label = state.textBoldEnabled ? "Desativar texto em negrito" : "Ativar texto em negrito";
+    ui.toggleBoldBtn.innerHTML = `<span aria-hidden="true">𝐁</span><span class="sr-only">${label}</span>`;
+    ui.toggleBoldBtn.setAttribute("aria-label", label);
     ui.toggleBoldBtn.setAttribute("aria-pressed", String(state.textBoldEnabled));
 }
 
@@ -505,8 +511,7 @@ function renderSeriesSelection() {
     const yearMeta = getYearMeta(state.currentYear);
     const seriesKeys = Object.keys(testsData[state.currentYear] || {});
     ui.selectionEyebrow.textContent = `${yearMeta.eyebrow} • ${yearMeta.label}`;
-    ui.selectionTitle.textContent = "Escolha a série";
-    ui.selectionSubtitle.textContent = "Cada série organiza os testes em blocos prontos para aplicação.";
+    ui.selectionTitle.textContent = "Série";
     ui.selectionGrid.dataset.mode = "series";
     ui.selectionGrid.innerHTML = seriesKeys
         .map((seriesKey) => {
@@ -517,9 +522,7 @@ function renderSeriesSelection() {
             return `
                 <button class="selection-card ${seriesNumber === 2 ? "selection-card--series-b" : ""}" type="button" data-select-series="${seriesNumber}">
                     <span class="selection-card__icon">${seriesNumber === 1 ? "📘" : "🚀"}</span>
-                    <span class="selection-card__badge">${escapeHtml(series.name)}</span>
                     <strong>${escapeHtml(series.name)}</strong>
-                    <span class="selection-card__meta">${count} testes disponíveis</span>
                 </button>
             `;
         })
@@ -535,19 +538,14 @@ function renderTestSelection() {
     const tests = getCurrentSeriesTests();
 
     ui.selectionEyebrow.textContent = `${yearMeta.eyebrow} • ${yearMeta.label}${seriesLabel}`;
-    ui.selectionTitle.textContent = "Escolha o teste";
-    ui.selectionSubtitle.textContent =
-        state.currentYear === 4
-            ? "Os testes deste nível já incluem leitura automática de palavras e pseudopalavras."
-            : "Abra o teste e acompanhe texto, compreensão, palavras e pseudopalavras em uma mesma sessão.";
+    ui.selectionTitle.textContent = "Teste";
     ui.selectionGrid.dataset.mode = "tests";
     ui.selectionGrid.innerHTML = tests
         .map((testData, index) => {
             return `
                 <button class="selection-card selection-card--test" type="button" data-select-test="${index}">
-                    <span class="selection-card__badge">Teste ${index + 1}</span>
+                    <span class="selection-card__badge">${testData.code ? escapeHtml(testData.code) : `Teste ${index + 1}`}</span>
                     <strong>${escapeHtml(testData.title)}</strong>
-                    <span class="selection-card__meta">${escapeHtml(testData.code)} • ${testData.words} palavras</span>
                 </button>
             `;
         })

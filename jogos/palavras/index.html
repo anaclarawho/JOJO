@@ -20,9 +20,18 @@
     <div class="app-shell">
         <div id="homeScreen" class="screen screen--home">
             <div class="home-top-actions">
-                <a class="ghost-button ghost-button--pill" href="../../">Voltar à JOJO</a>
-                <button id="openInfoBtn" class="ghost-button ghost-button--pill" type="button">Como funciona</button>
-                <button id="toggleSoundBtn" class="ghost-button ghost-button--pill" type="button" aria-pressed="true">Som ligado</button>
+                <a class="ghost-button ghost-button--pill utility-button" href="../../" aria-label="Voltar à JOJO">
+                    <span aria-hidden="true">⌂</span>
+                    <span class="sr-only">Voltar à JOJO</span>
+                </a>
+                <button id="openInfoBtn" class="ghost-button ghost-button--pill utility-button" type="button" aria-label="Abrir ajuda">
+                    <span aria-hidden="true">?</span>
+                    <span class="sr-only">Abrir ajuda</span>
+                </button>
+                <button id="toggleSoundBtn" class="ghost-button ghost-button--pill utility-button" type="button" aria-pressed="true" aria-label="Som ligado">
+                    <span aria-hidden="true">🔊</span>
+                    <span class="sr-only">Som ligado</span>
+                </button>
             </div>
 
             <div class="home-decor" aria-hidden="true">
@@ -40,16 +49,16 @@
                     <div class="brand__copy">
                         <p class="eyebrow">JOJO</p>
                         <h1>Teste de Fluência Leitora</h1>
-                        <p class="hero__text">Escolha um modo e um tipo de letra para começar a leitura.</p>
+                        <p class="hero__text">Escolha e comece.</p>
                     </div>
                 </div>
             </header>
 
             <section class="mode-section">
                 <div class="section-heading section-heading--stack">
-                    <p class="eyebrow">Modo 1</p>
-                    <h2>Teste cronometrado</h2>
-                    <p class="section-text">Leitura com cronômetro de 1 minuto.</p>
+                    <p class="eyebrow">⏱</p>
+                    <h2>1 minuto</h2>
+                    <p class="section-text">Ritmo rápido.</p>
                 </div>
 
                 <div class="selection-grid">
@@ -85,9 +94,9 @@
 
             <section class="mode-section">
                 <div class="section-heading section-heading--stack">
-                    <p class="eyebrow">Modo 2</p>
-                    <h2>Leitura livre</h2>
-                    <p class="section-text">Treino no seu ritmo, sem pressão do tempo.</p>
+                    <p class="eyebrow">🌿</p>
+                    <h2>Livre</h2>
+                    <p class="section-text">No seu tempo.</p>
                 </div>
 
                 <div class="selection-grid">
@@ -135,8 +144,14 @@
 
                 <div class="session-side">
                     <div class="session-tool-stack">
-                        <button id="sessionSoundBtn" class="ghost-button ghost-button--small ghost-button--light" type="button" aria-pressed="true">Som ligado</button>
-                        <button id="rotateScreenBtn" class="ghost-button ghost-button--small ghost-button--light orientation-button" type="button">Modo horizontal</button>
+                        <button id="sessionSoundBtn" class="ghost-button ghost-button--small ghost-button--light utility-button utility-button--light" type="button" aria-pressed="true" aria-label="Som ligado">
+                            <span aria-hidden="true">🔊</span>
+                            <span class="sr-only">Som ligado</span>
+                        </button>
+                        <button id="rotateScreenBtn" class="ghost-button ghost-button--small ghost-button--light orientation-button utility-button utility-button--light" type="button" aria-label="Girar para horizontal">
+                            <span aria-hidden="true">↔</span>
+                            <span class="sr-only">Girar para horizontal</span>
+                        </button>
                     </div>
                     <div class="session-scoreboard">
                         <div id="shownValue" class="session-scoreboard__value">0/100</div>
@@ -150,7 +165,7 @@
 
             <section class="word-stage">
                 <div id="wordDisplay" class="word-display">Clique em próxima para começar</div>
-                <p id="helperText" class="helper-text">Espaço avança • X marca dificuldade • Enter encerra</p>
+                <p id="helperText" class="helper-text">␣ avança • ✕ marca • ↵ encerra</p>
             </section>
 
             <div class="session-actions">
@@ -195,7 +210,7 @@
                 <div class="modal__header">
                     <div>
                         <p class="eyebrow">Informações</p>
-                        <h2 id="infoTitle">Sobre o jogo</h2>
+                        <h2 id="infoTitle">Ajuda</h2>
                     </div>
                     <button id="closeInfoBtn" class="icon-button" type="button" aria-label="Fechar">×</button>
                 </div>

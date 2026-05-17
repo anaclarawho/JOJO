@@ -18,12 +18,21 @@
 </head>
 <body>
     <div class="app-shell">
-        <button id="soundToggleBtn" class="ghost-button ghost-button--pill sound-toggle" type="button" aria-pressed="true">🔊 Som ligado</button>
+        <button id="soundToggleBtn" class="ghost-button ghost-button--pill sound-toggle utility-button" type="button" aria-pressed="true" aria-label="Som ligado">
+            <span aria-hidden="true">🔊</span>
+            <span class="sr-only">Som ligado</span>
+        </button>
 
         <div id="homeScreen" class="screen screen--home">
             <div class="top-actions">
-                <a class="ghost-button ghost-button--pill" href="../../">Voltar à JOJO</a>
-                <button id="openInfoBtn" class="ghost-button ghost-button--pill" type="button">Como funciona</button>
+                <a class="ghost-button ghost-button--pill utility-button" href="../../" aria-label="Voltar à JOJO">
+                    <span aria-hidden="true">⌂</span>
+                    <span class="sr-only">Voltar à JOJO</span>
+                </a>
+                <button id="openInfoBtn" class="ghost-button ghost-button--pill utility-button" type="button" aria-label="Abrir ajuda">
+                    <span aria-hidden="true">?</span>
+                    <span class="sr-only">Abrir ajuda</span>
+                </button>
             </div>
 
             <header class="hero">
@@ -32,13 +41,14 @@
                     <div class="brand__copy">
                         <p class="eyebrow">JOJO</p>
                         <h1>TIMER</h1>
+                        <p class="hero__text">Escolha e acompanhe.</p>
                     </div>
                 </div>
             </header>
 
             <section class="choice-section">
                 <div class="section-heading">
-                    <h2>ESCOLHA O TIPO DE TIMER</h2>
+                    <h2>ESCOLHA</h2>
                 </div>
 
                 <div class="mode-grid">
@@ -90,8 +100,14 @@
 
         <div id="timerScreen" class="screen screen--timer hidden">
             <div class="top-actions top-actions--timer">
-                <button id="backHomeBtn" class="ghost-button ghost-button--pill" type="button">Voltar</button>
-                <button id="openInfoTimerBtn" class="ghost-button ghost-button--pill" type="button">Como funciona</button>
+                <button id="backHomeBtn" class="ghost-button ghost-button--pill utility-button" type="button" aria-label="Voltar">
+                    <span aria-hidden="true">←</span>
+                    <span class="sr-only">Voltar</span>
+                </button>
+                <button id="openInfoTimerBtn" class="ghost-button ghost-button--pill utility-button" type="button" aria-label="Abrir ajuda">
+                    <span aria-hidden="true">?</span>
+                    <span class="sr-only">Abrir ajuda</span>
+                </button>
             </div>
 
             <header class="timer-header">
@@ -171,7 +187,7 @@
                 <div class="modal__header">
                     <div>
                         <p class="eyebrow">Informações</p>
-                        <h2 id="infoTitle">Como funciona</h2>
+                        <h2 id="infoTitle">Ajuda</h2>
                     </div>
                     <button id="closeInfoBtn" class="icon-button" type="button" aria-label="Fechar">×</button>
                 </div>
